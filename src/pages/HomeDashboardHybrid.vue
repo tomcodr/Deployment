@@ -48,13 +48,11 @@
   
     <div class="motorhaube-text">Motorhaube</div>
     <div class="spoiler-closed"><SpoilerAnzeige/></div>
-    <div class="motorhaube-closed" v-if="currentLocale === 'de'" :style="{ left: '1060px' }">
-      Geschlossen
+    <div class="motorhaube-closed" >
+      GESCHLOSSEN
     </div>
 
-    <div class="motorhaube-closed" v-else :style="{ left: '1131px' }">
-      Closed
-    </div>
+   
     <div class="spoiler-text">Spoiler</div>
     <div class="hupe-text">Hupe</div>
     <div class="hupe-aktiv"><HupeAnzeige/></div>
@@ -534,25 +532,28 @@
     user-select: none;
   }
   .png-auto-dashboard {
-    position: absolute;
-    top: 103px;
-    left: 385px;
-    width: 670px;
-    height: 287px;
-    object-fit: cover;
-    opacity: 1;
-    user-select: none;
-  }
-  
-  .auto-titel {
-    position: absolute;
-    top: 130px;
-    left: 652px;
-    width: 200px;
-    height: 27px;
-    font-size: 20px;
-    user-select: none;
-  }
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  opacity: 0.7;
+}
+
+
+.auto-titel {
+  position: absolute;
+  top: 15%; /* Zentrieren vertikal */
+  left: 50%; /* Zentrieren horizontal */
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  white-space: nowrap; /* Verhindert, dass der Text umbrochen wird */
+}
   .motorhaube-text {
     position: absolute;
     height: 10px; 
@@ -582,7 +583,7 @@
     height: 10px; 
     width: 71px; 
     top: 244px; 
-    left: 1131px; 
+    left: 1062px; 
     font-weight: 300;
     color: #426b1f;
     text-align: center;

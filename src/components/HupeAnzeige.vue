@@ -21,7 +21,7 @@ export default {
 
         if (!isNaN(hornValue)) {
           this.hornValue = hornValue;
-          this.hornStatus = hornValue === 0.0 ? "OFF" : "ACTIVE";
+          this.hornStatus = hornValue === 0.0 ? "AUS" : "ACTIV";
         } else {
           console.error("Ungültiger Wert für Horn:", data.messwerte[0]?.horn);
           // Setze hornStatus auf null, um "N/A" anzuzeigen

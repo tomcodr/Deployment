@@ -49,15 +49,18 @@
       },
    });
   </script>
-  <style scoped>
+
+<style scoped>
     .png-auto-dashboard-icon4 {
       position: absolute;
-      top: 12%;
-      left: 30%;
-      width: 670px;
-      height: 287px;
-      object-fit: cover;
-      opacity: 0.7;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  opacity: 0.7;
     }
     .wasser-icon {
       position: absolute;
@@ -88,7 +91,7 @@
     .oel-icon {
       position: absolute;
       top: 256px;
-      left: 190px;
+      left: 260px;
       width: 52px;
       height: 37px;
       object-fit: cover;
@@ -96,12 +99,13 @@
     
     .auto-titel {
       position: absolute;
-      top: 15%;
-      left: 48%;
-      font-size: 18px;
-      font-weight: 600;
-      font-family: 'Poppins';
-      color: #fff;
+  top: 15%; /* Zentrieren vertikal */
+  left: 50%; /* Zentrieren horizontal */
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  white-space: nowrap; /* Verhindert, dass der Text umbrochen wird */
     }
    
     .chart-oel {

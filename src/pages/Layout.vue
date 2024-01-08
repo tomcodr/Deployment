@@ -48,16 +48,8 @@
  });
 </script>
 
-
 <style scoped>
 
-.switch{
- position: absolute;
-   top: 1%;
-   left: 80%;
- margin-top: 150px;
- margin-left: auto;
-}
  .layout-white {
    position: absolute;
    top: 35%;

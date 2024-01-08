@@ -51,17 +51,17 @@ goBack() {
 </script>
 
 
-
 <style scoped>
 
 .auto-titel {
   position: absolute;
-  top: 15%;
-  left: 48%;
-  font-size: 18px;
+  top: 15%; /* Zentrieren vertikal */
+  left: 50%; /* Zentrieren horizontal */
+  transform: translate(-50%, -50%);
   font-weight: 600;
-  font-family: 'Poppins';
+  font-family: 'Poppins', sans-serif;
   color: #fff;
+  white-space: nowrap; /* Verhindert, dass der Text umbrochen wird */
 }
 .porsche-von-oben {
   position: absolute;

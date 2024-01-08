@@ -35,7 +35,7 @@ export default {
         if (!isNaN(absValue)) {
           // Aktualisiere die Daten in der Komponente basierend auf dem ABS-Wert
           this.absValue = absValue;
-          this.absStatus = absValue === 1.0 ? "ACTIVE" : "OFF";
+          this.absStatus = absValue === 1.0 ? "ACTIV" : "AUS";
         } else {
           // Gib eine Fehlermeldung aus, wenn der ABS-Wert ungültig ist
           console.error("Ungültiger Wert für ABS:", data.messwerte[0]?.isABSBrakeActive);

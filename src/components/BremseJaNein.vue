@@ -35,7 +35,7 @@ export default {
         if (!isNaN(brakeLightValue)) {
           // Aktualisiere die Daten in der Komponente basierend auf dem Bremslichtwert
           this.brakeLightValue = brakeLightValue;
-          this.brakeLightStatus = brakeLightValue === 1.0 ? "ON" : "OFF";
+          this.brakeLightStatus = brakeLightValue === 1.0 ? "AN" : "AUS";
         } else {
           // Gib eine Fehlermeldung aus, wenn der Bremslichtwert ungültig ist
           console.error("Ungültiger Wert für Bremslicht:", data.messwerte[0]?.brakelight_signal_R);

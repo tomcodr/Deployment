@@ -46,16 +46,17 @@ export default defineComponent({
 });
 </script>
 
-
 <style scoped>
 
 .png-auto {
   position: absolute;
-  top: 12%;
-  left: 30%;
-  width: 670px;
-  height: 287px;
-  object-fit: cover;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
   opacity: 0.7;
 }
 
@@ -76,12 +77,13 @@ export default defineComponent({
 }
 .auto-titel {
   position: absolute;
-  top: 15%;
-  left: 48%;
-  font-size: 18px;
+  top: 15%; /* Zentrieren vertikal */
+  left: 50%; /* Zentrieren horizontal */
+  transform: translate(-50%, -50%);
   font-weight: 600;
-  font-family: 'Poppins';
+  font-family: 'Poppins', sans-serif;
   color: #fff;
+  white-space: nowrap; /* Verhindert, dass der Text umbrochen wird */
 }
 
 

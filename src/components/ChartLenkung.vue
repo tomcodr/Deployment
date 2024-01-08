@@ -90,8 +90,8 @@ export default {
           scales: {
             y: {
               beginAtZero: false,
-              min: -150,
-              max: 150,
+              min: -200,
+              max: 200,
             },
           },
           plugins: {
