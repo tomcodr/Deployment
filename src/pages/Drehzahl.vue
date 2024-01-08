@@ -9,11 +9,16 @@
   
   <div class="auto-titel">Porsche 911</div>
 
+  
   <img
     class="png-auto-dashboard"
+    :src="getImagePath"
     alt=""
-    src="/png-auto-dashboard@2x.png"
-  />
+    />
+
+
+
+
 </template>
 
 
@@ -23,10 +28,17 @@ import { defineComponent } from "vue";
 import Navigation from '../components/Navigation.vue';
 import DrehzahlAnzeige from "../components/DrehzahlAnzeige.vue";
 import ChartDrehzahl from "../components/ChartDrehzahl.vue";
+import store from '../store/store';
+
 
 export default defineComponent({
   name: "Drehzahl",
   components: { DrehzahlAnzeige, ChartDrehzahl, Navigation },
+  computed: {
+    getImagePath() {
+      return store.getters.getImagePath;
+    },
+  },
   methods: {
 goBack() {
     // Navigiere zur vorherigen Seite

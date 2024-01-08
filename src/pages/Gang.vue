@@ -9,10 +9,10 @@
   <div class="gear-text">GEAR</div>
   <div class="gear-value"><GangAnzeige/></div>
   <img
-    class="png-auto-dashboard"
-    alt=""
-    src="/png-auto-dashboard@2x.png"
-  />
+      class="png-auto"
+      alt=""
+      :src="getImagePath"
+    />
   
   <div class="auto-titel">Porsche 911</div>
   
@@ -24,11 +24,16 @@ import { defineComponent } from "vue";
 import Navigation from '../components/Navigation.vue';
 import GangAnzeige from "../components/GangAnzeige.vue";
 import ChartGang from "../components/ChartGang.vue";
-
+import store from '../store/store';
 
 export default defineComponent({
   name: "Gang",
   components: { GangAnzeige, ChartGang, Navigation },
+  computed: {
+    getImagePath() {
+      return store.getters.getImagePath;
+    },
+  },
   methods: {
     onProfilIconClick() {
       this.$router.push("/profil");

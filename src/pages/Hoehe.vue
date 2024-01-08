@@ -11,10 +11,10 @@
   <div class="auto-titel">Porsche 911</div>
   
   <img
-    class="png-auto-dashboard"
-    alt=""
-    src="/png-auto-dashboard@2x.png"
-  />
+      class="png-auto-dashboard"
+      alt=""
+      :src="getImagePath"
+    />
 
 </template>
 <script>
@@ -22,10 +22,18 @@ import { defineComponent } from "vue";
 import Navigation from '../components/Navigation.vue';
 import ChartHoehe from "../components/ChartHoehe.vue";
 import HoeheAnzeige from "../components/HoeheAnzeige.vue";
+import store from "../store/store";
+
 
 export default defineComponent({
   name: "Motor",
   components: { ChartHoehe, HoeheAnzeige, Navigation },
+  computed: {
+    getImagePath() {
+      return store.getters.getImagePath;
+    },
+  },
+ 
   methods: {
     goBack() {
     // Navigiere zur vorherigen Seite

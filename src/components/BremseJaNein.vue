@@ -53,6 +53,11 @@ export default {
   mounted() {
     // Beim Laden der Komponente, rufe die Funktion zum Abrufen des Bremslichtstatus auf
     this.fetchBrakeLightStatus();
+
+    // Setze ein Intervall, um die Funktion alle 2 Sekunden aufzurufen
+    setInterval(() => {
+      this.fetchBrakeLightStatus();
+    }, 2000);
   },
 };
 </script>

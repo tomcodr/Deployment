@@ -9,9 +9,9 @@
     <img class="tank-aktuell-leiste" alt="" src="/tankbalken-aktuell.svg" />
     
     <img
-      class="auto-dashboard"
+      class="png-auto"
       alt=""
-      src="/png-auto-dashboard@2x.png"
+      :src="getImagePath"
     />
     <div class="auto-titel">Porsche 911</div>
     
@@ -22,10 +22,17 @@
   import Navigation from '../components/Navigation.vue';
   import MesswerteDropdown from "../components/MesswerteDropdown.vue";
   import TankAnzeige from "../components/TankAnzeige.vue";
+  import store from "../store/store";
+
 
   export default defineComponent({
     name: "Tank",
     components: { MesswerteDropdown, TankAnzeige, Navigation },
+    computed: {
+    getImagePath() {
+      return store.getters.getImagePath;
+    },
+  },
     methods: {
       goBack() {
       // Navigiere zur vorherigen Seite

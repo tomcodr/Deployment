@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       airflowspeedValue: null,
+      updateInterval: null, // Variable für das Aktualisierungsintervall
     };
   },
   methods: {
@@ -48,6 +49,12 @@ export default {
   },
   mounted() {
     this.fetchAirflowspeedValue();
+    // Starte das Aktualisierungsintervall
+    this.updateInterval = setInterval(this.fetchAirflowspeedValue, 2000);
+  },
+  beforeDestroy() {
+    // Beende das Aktualisierungsintervall, um Speicherlecks zu vermeiden
+    clearInterval(this.updateInterval);
   },
 };
 </script>

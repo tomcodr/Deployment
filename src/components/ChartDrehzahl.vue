@@ -13,12 +13,11 @@
 </template>
 
 <script>
-// import Chart from 'chart.js/auto';
-import 'chartjs-plugin-zoom';
-import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js/auto'
+import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js/auto';
 import zoomPlugin from 'chartjs-plugin-zoom';
 
-Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, zoomPlugin)
+Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, zoomPlugin);
+
 export default {
   data() {
     return {
@@ -31,6 +30,11 @@ export default {
   },
   mounted() {
     this.fetchRpmData();
+
+    // Setze ein Intervall, um die Funktion alle 2 Sekunden aufzurufen
+    setInterval(() => {
+      this.fetchRpmData();
+    }, 2000);
   },
   methods: {
     async fetchRpmData() {
@@ -82,15 +86,15 @@ export default {
           speed: 10,
         },
         zoom: {
-                wheel: {
-                  enabled: true,
-                },
-                pinch: {
-                  enabled: true
-                },
-                mode: 'xy',
-                speed: 0.1,
-              },
+          wheel: {
+            enabled: true,
+          },
+          pinch: {
+            enabled: true
+          },
+          mode: 'xy',
+          speed: 0.1,
+        },
       };
 
       this.chartInstance = new Chart(ctx, {

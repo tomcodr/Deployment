@@ -12,36 +12,24 @@
 
     <div class="input-box">
       <div class="input-field">
-        <input type="text" v-model="Name" placeholder="Name" required>
+        <input type="text" v-model="Name" placeholder="Full Name" required>
         <i class='bx bxs-user'></i>
       </div>
-      <div class="input-field">
-        <input type="text" v-model="Surname" placeholder="Surname" required>
-        <i class='bx bxs-user'></i>
-      </div>
-    </div>
-
-    <div class="input-box">
       <div class="input-field">
         <input type="email" v-model="email" placeholder="Email" required>
         <i class='bx bxs-envelope'></i>
       </div>
-     <div class="input-field">
-    <input type="tel" v-model="phoneNumber" placeholder="Phone Number" required>
-    <i class='bx bxs-phone'></i>
-</div>
-
     </div>
 
     <div class="input-box">
       <div class="input-field">
         <input type="password" v-model="password" placeholder="Password" required>
-        <i class='bx bxs-lock-alt' ></i>
+        <i class='bx bxs-lock-alt'></i>
       </div>
-      <div class="input-field">
-        <input type="password" v-model="confirmPassword" placeholder="Confirm Password" required>
-        <i class='bx bxs-lock-alt' ></i>
-      </div>
+     <div class="input-field">
+    <input type="password" v-model="confrimPassword" placeholder="Confirm Password" required>
+    <i class='bx bxs-lock-alt'></i>
+</div>
     </div>
 
     <label>

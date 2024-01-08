@@ -24,7 +24,6 @@
             <div @click="onGangclick" class="text">Gang</div><br>
             <div @click="onTankclick" class="text">Tank</div><br>
             <div @click="onLenkungclick" class="text">Lenkung</div><br>
-            <div @click="onMotorclick" class="text">Motor</div><br>
             <div @click="onTripsclick" class="text">Trips</div><br>
             <div @click="onHoeheclick" class="text">Höhe</div><br>
           </div>

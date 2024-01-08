@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       oilTemperatureValue: null,
+      updateInterval: null, // Variable für das Aktualisierungsintervall
     };
   },
   methods: {
@@ -41,7 +42,17 @@ export default {
     },
   },
   mounted() {
+    // Starte das Aktualisierungsintervall
+    this.updateInterval = setInterval(() => {
+      this.fetchOilTemperatureValue();
+    }, 2000);
+
+    // Führe fetchOilTemperatureValue einmal bei der Initialisierung aus
     this.fetchOilTemperatureValue();
+  },
+  beforeDestroy() {
+    // Beende das Aktualisierungsintervall, um Speicherlecks zu vermeiden
+    clearInterval(this.updateInterval);
   },
 };
 </script>

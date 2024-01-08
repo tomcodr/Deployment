@@ -7,10 +7,10 @@
   </div>
 
   <img
-    class="png-auto"
-    alt=""
-    src="/png-auto-dashboard@2x.png"
-  />
+      class="png-auto"
+      alt=""
+      :src="getImagePath"
+    />
  
   
   
@@ -25,10 +25,17 @@ import { defineComponent } from "vue";
 import Navigation from '../components/Navigation.vue';
 import GeschwindigkeitAnzeige from "../components/GeschwindigkeitAnzeige.vue";
 import ChartGeschwindigkeit from "../components/ChartGeschwindigkeit.vue";
+import store from '../store/store';
+
 
 export default defineComponent({
   name: "Geschwindigkeit",
   components: { GeschwindigkeitAnzeige, ChartGeschwindigkeit, Navigation },
+  computed: {
+    getImagePath() {
+      return store.getters.getImagePath;
+    },
+  },
   methods: {
     goBack() {
     // Navigiere zur vorherigen Seite

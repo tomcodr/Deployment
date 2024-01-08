@@ -10,10 +10,10 @@
       
       
       <img
-        class="auto-dashboard"
-        alt=""
-        src="/png-auto-dashboard@2x.png"
-      />
+      class="auto-dashboard"
+      alt=""
+      :src="getImagePath"
+    />
       
       <div class="auto-titel">Porsche 911</div>
      
@@ -24,10 +24,17 @@
     import Navigation from '../components/Navigation.vue';
     import MesswerteDropdown from "../components/MesswerteDropdown.vue";
     import ChartTrips from "../components/ChartTrips.vue";
-  
+    import store from "../store/store";
+
+
     export default defineComponent({
       name: "Trips",
       components: { MesswerteDropdown, ChartTrips, Navigation },
+      computed: {
+    getImagePath() {
+      return store.getters.getImagePath;
+    },
+  },
       methods: {
         goBack() {
         // Navigiere zur vorherigen Seite

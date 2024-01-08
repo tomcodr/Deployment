@@ -2,13 +2,22 @@
   <b :class="{ 'brake-temperature-value': true, 'yellow-text': brakeTemperatureValue >= 300 && brakeTemperatureValue < 400, 'red-text': brakeTemperatureValue >= 400 }">{{ brakeTemperatureValue !== null ? `${brakeTemperatureValue}°` : 'N/A' }}</b>
 </template>
 
+<style>
+.yellow-text {
+  color: yellow;
+}
 
+.red-text {
+  color: red;
+}
+</style>
 
 <script>
 export default {
   data() {
     return {
       brakeTemperatureValue: null,
+      updateInterval: null, // Variable für das Aktualisierungsintervall
     };
   },
   methods: {
@@ -39,22 +48,17 @@ export default {
     },
   },
   mounted() {
-    setInterval(() => {
+    // Starte das Aktualisierungsintervall
+    this.updateInterval = setInterval(() => {
       this.fetchBrakeTemperatureValue();
-    }, 5000);
+    }, 2000);
 
+    // Führe fetchBrakeTemperatureValue einmal bei der Initialisierung aus
     this.fetchBrakeTemperatureValue();
+  },
+  beforeDestroy() {
+    // Beende das Aktualisierungsintervall, um Speicherlecks zu vermeiden
+    clearInterval(this.updateInterval);
   },
 };
 </script>
-
-
-<style>
-.yellow-text {
-  color: yellow;
-}
-
-.red-text {
-  color: red;
-}
-</style>

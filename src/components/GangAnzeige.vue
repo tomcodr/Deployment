@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       gearValue: null,
+      updateInterval: null, // Variable für das Aktualisierungsintervall
     };
   },
   methods: {
@@ -38,6 +39,12 @@ export default {
   },
   mounted() {
     this.fetchGearValue();
+    // Starte das Aktualisierungsintervall
+    this.updateInterval = setInterval(this.fetchGearValue, 2000);
+  },
+  beforeDestroy() {
+    // Beende das Aktualisierungsintervall, um Speicherlecks zu vermeiden
+    clearInterval(this.updateInterval);
   },
 };
 </script>

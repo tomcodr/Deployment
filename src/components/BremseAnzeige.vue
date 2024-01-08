@@ -54,6 +54,11 @@ export default {
   mounted() {
     // Beim Laden der Komponente, rufe die Funktion zum Abrufen der Bremsendaten auf
     this.fetchData();
+
+    // Setze ein Intervall, um die Funktion alle 2 Sekunden aufzurufen
+    setInterval(() => {
+      this.fetchData();
+    }, 2000);
   },
 };
 </script>

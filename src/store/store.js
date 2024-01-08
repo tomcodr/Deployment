@@ -1,26 +1,32 @@
+import createPersistedState from 'vuex-persistedstate';
 import { createStore } from 'vuex';
 
-
-
-
-
-
 export default createStore({
-
+    plugins: [createPersistedState()],                //WENN MAN EIN AUTO LÖSCHT MUSS MAN DARAUF ACHTEN, DAS PERSISTEND ZU BEACHTEN
     state: {
-        selectedLanguage: 'de', // default language
+
+        selectedBrand: null,
+        imagePath: null,
     },
     mutations: {
-        updateSelectedLanguage(state, lang) {
-            state.selectedLanguage = lang;
+        updateSelectedBrand(state, brand) {
+            state.selectedBrand = brand;
+        },
+        setImagePath(state, path) {
+            state.imagePath = path;
         },
     },
     actions: {
-        updateSelectedLanguage({ commit }, lang) {
-            commit('updateSelectedLanguage', lang);
+        updateSelectedBrand({ commit }, brand) {
+            commit('updateSelectedBrand', brand);
+        },
+        setImagePath({ commit }, path) {
+            commit('setImagePath', path)
         },
     },
     getters: {
-        getSelectedLanguage: (state) => state.selectedLanguage,
+
+        getSelectedBrand: (state) => state.selectedBrand,
+        getImagePath: (state) => state.imagePath,
     },
 });

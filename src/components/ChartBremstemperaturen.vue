@@ -1,19 +1,17 @@
 <template>
   <div>
     <!-- Ladeanzeige -->
-    <div class = "loading" v-if="loading">Lädt...</div>
+    <div class="loading" v-if="loading">Lädt...</div>
 
     <canvas ref="myChart" width="800" height="400"></canvas>
   </div>
 </template>
 
 <script>
-// import Chart from 'chart.js/auto';
-import 'chartjs-plugin-zoom';
-import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js/auto'
+import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js/auto';
 import zoomPlugin from 'chartjs-plugin-zoom';
 
-Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, zoomPlugin)
+Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, zoomPlugin);
 
 export default {
   data() {
@@ -24,6 +22,11 @@ export default {
   },
   mounted() {
     this.fetchBrakeTemperatureData();
+
+    // Setze ein Intervall, um die Funktion alle 2 Sekunden aufzurufen
+    setInterval(() => {
+      this.fetchBrakeTemperatureData();
+    }, 2000);
   },
   methods: {
     async fetchBrakeTemperatureData() {

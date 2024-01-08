@@ -8,6 +8,7 @@ export default {
     return {
       hornValue: null,
       hornStatus: null,
+      updateInterval: null, // Variable für das Aktualisierungsintervall
     };
   },
   methods: {
@@ -35,6 +36,12 @@ export default {
   },
   mounted() {
     this.fetchHornStatus();
+    // Starte das Aktualisierungsintervall
+    this.updateInterval = setInterval(this.fetchHornStatus, 2000);
+  },
+  beforeDestroy() {
+    // Beende das Aktualisierungsintervall, um Speicherlecks zu vermeiden
+    clearInterval(this.updateInterval);
   },
 };
 </script>

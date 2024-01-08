@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       waterTemperature: null,
+      updateInterval: null, // Variable für das Aktualisierungsintervall
     };
   },
   methods: {
@@ -43,7 +44,17 @@ export default {
     },
   },
   mounted() {
+    // Starte das Aktualisierungsintervall
+    this.updateInterval = setInterval(() => {
+      this.fetchWaterTemperature();
+    }, 2000);
+
+    // Führe fetchWaterTemperature einmal bei der Initialisierung aus
     this.fetchWaterTemperature();
+  },
+  beforeDestroy() {
+    // Beende das Aktualisierungsintervall, um Speicherlecks zu vermeiden
+    clearInterval(this.updateInterval);
   },
 };
 </script>

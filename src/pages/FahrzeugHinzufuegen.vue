@@ -1,12 +1,5 @@
 <template>
-  <Navigation/>
-  <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE-edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Login Form in HTML and CSS</title>
-      <link rel="stylesheet" href="style.css">
-    </head>
+ <Navigation/>
 
     <body>
   <div class="wrapper">
@@ -17,14 +10,15 @@
         <div class="input-field">
           <input type="text" v-model="brand" placeholder="Marke" required list="brandList">
           <datalist id="brandList">
-  <option value="BMW"></option>
-  <option value="Mercedes-Benz"></option>
-  <option value="Volkswagen"></option>
-  <option value="Ford"></option>
-  <option value="Audi"></option>
-  <option value="Porsche"></option>
-</datalist>
+            <option value="BMW"></option>
+            <option value="Mercedes-Benz"></option>
+            <option value="Volkswagen"></option>
+            <option value="Ford"></option>
+            <option value="Audi"></option>
+            <option value="Porsche"></option>
+          </datalist>
           <i class='bx bx-copyright'></i>
+        
         </div>
         <div class="input-field">
           <input type="text" v-model="username" placeholder="Modell" required>
@@ -35,23 +29,22 @@
       <div class="input-box">
         <div class="input-field">
           <input type="text" v-model="VINNumber" placeholder="VIN Nummer" title="17 Ziffern" required pattern="[A-HJ-NPR-Z0-9]{17}">
-
           <i class='bx bxs-key'></i>
         </div>
+        
         <div class="input-field">
           <input type="text" v-model="color" placeholder="Farbe" required list="colorList">
-<datalist id="colorList">
-  <option value="schwarz"></option>
-  <option value="weiss"></option>
-  <option value="blau"></option>
-  <option value="rot"></option>
-  <option value="grün"></option>
-  <option value="pink"></option>
-</datalist>
-
+          <datalist id="colorList">
+            <option value="schwarz"></option>
+            <option value="weiss"></option>
+            <option value="blau"></option>
+            <option value="rot"></option>
+            <option value="grün"></option>
+            <option value="pink"></option>
+          </datalist>
           <i class='bx bx-palette'></i>
         </div>
-      </div>
+        </div>
 
      
 
@@ -80,6 +73,7 @@
 </template>
 
 <script>
+import store from '../store/store';
 import Navigation from '../components/Navigation.vue';
 
 export default {
@@ -92,6 +86,7 @@ export default {
       password: '',
       confirmPassword: '',
       declaration: false,
+      brand:'',
     };
   },
   components: {Navigation},
@@ -129,6 +124,8 @@ export default {
       });
 
       if (response.ok) {
+        store.commit('updateSelectedBrand', this.brand);
+        this.$router.push("/");
         console.log('Fahrzeug erfolgreich gepostet!');
       } else {
         console.error('Fehler beim Posten des Fahrzeugs.');

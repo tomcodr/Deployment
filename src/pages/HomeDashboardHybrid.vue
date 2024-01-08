@@ -1,61 +1,58 @@
+//Test
+
+
+
 <template>
   <Navigation/>
   <div class="home-dashboard-hybrid">
     
     
-   
+    <div class="home-otto-elemente">
       
-  <div class="gang">
-    <div class="gang-background" @click="onGangContainerClick"></div>
+      <div class="gang">
+    <div class="element-background" @click="onGangContainerClick"></div>
     <b class="gang-value"><GangAnzeige/></b>
-    <div class="gangtitel">Gang</div>
-    <div @click="onGangContainerClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
+    <div class="element-titel">Gang</div>
   </div>
       
       <div class="bremse">
-          <div class="bremse-background" @click=" onBremseContainerClick"></div>
+          <div class="element-background" @click=" onBremseContainerClick"></div>
           <b class="bremse-value"><BremseAnzeige/></b>
-          <div class="bremsetitel">Bremsdruck</div>
-          <div @click="onBremseContainerClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
+          <div class="element-titel">Bremsdruck</div>
       </div>
       
-      <div class="geschwindigkeit">
-        <div class="geschwindigkeit-background" @click="onSpeedContainerClick"></div>
-        <b class="geschwindigkeit-value"><GeschwindigkeitAnzeige/></b>
-        <div class="geschwindigkeittitel">Geschwindigkeit</div>
-        <div @click="onSpeedContainerClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
+      <div class="speed">
+        <div class="element-background" @click="onSpeedContainerClick"></div>
+        <b class="speed-value"><GeschwindigkeitAnzeige/></b>
+        <div class="element-titel">Geschwindigkeit</div>
       </div>
-
-      
       
       <div class="oel-wasser">
-        <div class="oelwasser-background" @click="onWasserContainerClick"></div>
+        <div class="element-background" @click="onLWasserContainerClick"></div>
         <img class="png-wasser-icon"  src="/png-wasser-icon@2x.png" />
         <img class="png-oel-icon"  src="/png-l-icon@2x.png" />
         <b class="wasser-value"><WasserTemperaturAnzeige/></b>
         <b class="oel-value"><OelTemperaturAnzeige/></b>
-        <div @click="onWasserContainerClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
+        
       </div>
-
-
       <div class="drehzahl">
-        <div class="drehzahl-background" @click="onDrehzahlContainerClick"></div>
+        <div class="element-background" @click="onDrehzahlContainerClick"></div>
         <b class="drehzahl-value"><DrehzahlAnzeige/></b>
-        <div class="drehlzahltitel">Drehzahl</div>
-        <div @click="onDrehzahlContainerClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
+        <div class="element-titel">Drehzahl</div>
+
       </div>
    
-    
+    </div>
     
 
   
     <div class="motorhaube-text">Motorhaube</div>
     <div class="spoiler-closed"><SpoilerAnzeige/></div>
-    <div class="motorhaube-closed" v-if="currentLocale === 'de'" :style="{ left: '71%' }">
+    <div class="motorhaube-closed" v-if="currentLocale === 'de'" :style="{ left: '1060px' }">
       Geschlossen
     </div>
 
-    <div class="motorhaube-closed" v-else :style="{ left: '71%' }">
+    <div class="motorhaube-closed" v-else :style="{ left: '1131px' }">
       Closed
     </div>
     <div class="spoiler-text">Spoiler</div>
@@ -86,8 +83,11 @@
       src="/batterie-balken-aktuell-hybrid.svg"
     />
     <div><TankAnzeige/></div>
+    
     <div><TankvolumenAnzeige/></div>
+    
     <div class="png-tank-icon-hybrid"><i class='bx bxs-gas-pump'></i></div>
+    
     <img
       class="tank-balken-hintergrund-hybrid"
       alt=""
@@ -98,11 +98,13 @@
       alt=""
       src="/batterie-balken-aktuell-elektisch.svg"
     />
-    <img
-      class="png-auto-dashboard"
-      alt=""
-      src="/png-auto-dashboard@2x.png"
+    <img class="png-auto-dashboard" 
+    :src="getMarkePic(selectedBrand)" 
+    alt=""
     />
+    {{ getMarkePic(selectedBrand) }} 
+
+    
     <div class="auto-titel">Porsche 911</div>
 
     </div>
@@ -118,7 +120,6 @@
 
 <script>
   import { defineComponent } from "vue";
-  import Navigation from '../components/Navigation.vue';
   import GangAnzeige from "../components/GangAnzeige.vue"
   import DrehzahlAnzeige from "../components/DrehzahlAnzeige.vue"
   import TankAnzeige from "../components/TankAnzeige.vue"
@@ -131,6 +132,8 @@
   import ABS from "../components/ABS.vue"
   import BremseJaNein from "../components/BremseJaNein.vue"
   import TankvolumenAnzeige from "../components/TankvolumenAnzeige.vue"
+  import store from '../store/store';
+  import Navigation from '../components/Navigation.vue';
 
 
 
@@ -139,26 +142,73 @@
     name: "HomeDashboardHybrid",
     data() {
       return {
-      
+        selectedBrand: null,
       };
     },
     components: { GangAnzeige, DrehzahlAnzeige, TankAnzeige, GeschwindigkeitAnzeige, OelTemperaturAnzeige, BremseAnzeige, WasserTemperaturAnzeige, SpoilerAnzeige, HupeAnzeige,ABS, BremseJaNein, TankvolumenAnzeige, Navigation},
+    
+    created() {
+      this.getMarkePic();
+},
+      
+    
+    
     methods: {
       
+      getMarkePic() {
+    const selectedBrand = store.getters.getSelectedBrand;
+    console.log("Selected Brand", selectedBrand); 
+    let imagePath;
+
+    switch (selectedBrand) {
+      case 'BMW':
+        imagePath = '/BMW.png';
+        break;
+      case 'Mercedes-Benz':
+        imagePath = '/Mercedes.png';
+        break;
+      case 'Volkswagen':
+        imagePath = '/Volkswagen.jpg';
+        break;
+      case 'Ford':
+        imagePath = '/Ford.jpg';
+        break;
+      case 'Audi':
+        imagePath = '/audi-a6-schwarz-vorne.png'; 
+        break;
+      case 'Porsche':
+        imagePath = '/Porsche.png';
+        break;
+      default:
+        console.error("Kein Bild konnte geladen werden. Unbekannte Marke:", selectedBrand);
+        imagePath = null;
+    }
+    
+    if (imagePath) {
+        console.log("Image Path:", imagePath); // Zusätzlicher Log für den Bildpfad
+        store.dispatch('setImagePath', imagePath);
+        return imagePath;
+        
+  } else {
+    return null;
+  }
+  },
+
+
       onGangContainerClick() {
-        this.$router.push("/gang");
+        this.$router.push("gang");
       },
       onBremseContainerClick() {
-        this.$router.push("/bremsen");
+        this.$router.push("bremsen");
       },
       onSpeedContainerClick() {
-        this.$router.push("/geschwindigkeit");
+        this.$router.push("geschwindigkeit");
       },
-      onWasserContainerClick() {
-        this.$router.push("/temperaturen");
+      onLWasserContainerClick() {
+        this.$router.push("temperaturen");
       },
       onDrehzahlContainerClick() {
-        this.$router.push("/drehzahl");
+        this.$router.push("drehzahl");
       },
       openSideBoardMenu() {
         this.isSideBoardMenuOpen = true;
@@ -167,7 +217,7 @@
         this.isSideBoardMenuOpen = false;
       },
       onProfilIconClick() {
-        this.$router.push("/profil");
+        this.$router.push("profil");
       },
       async fetchDataForComponents() {
         try {
@@ -222,545 +272,405 @@
 <style scoped>
 
 
-
-  @media (max-width: 1920px) {
-
-
-
-
-.png-auto-dashboard {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 36%;
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
-  opacity: 0.7;
-}
-
-
-.auto-titel {
-  position: absolute;
-  top: 15%; /* Zentrieren vertikal */
-  left: 50%; /* Zentrieren horizontal */
-  transform: translate(-50%, -50%);
-  font-weight: 600;
-  font-family: 'Poppins', sans-serif;
-  color: #fff;
-  white-space: nowrap; /* Verhindert, dass der Text umbrochen wird */
-}
-
-
-
-
-
-
-.gang {
-  position: absolute;
-  top: 0px; /* Oben: 5% der Fensterhöhe */
-  left: 0px; /* Links: 70% der Fensterbreite */
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  cursor: pointer;
-  user-select: none;
-}
-
-.gangtitel {
-  position: absolute;
-  top: 61vh; /* Oben: 55% der Fensterhöhe */
-  left: 81vw; /* Links: 120% der Fensterbreite */
-  font-weight: 300;
-  font-size: 20px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.gang-value {
-  position: absolute;
-  top: 35.5vh; /* Oben: 55% der Fensterhöhe */
-  left: 40.6vw;
-  font-weight: 300;
-  font-size: 20px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh;/* Links: 125% der Fensterbreite */
-  /* Weitere Stile nach Bedarf */
-}
-
-.gang-background {
-  position: absolute;
-  top: 60vh; /* Oben: 55% der Fensterhöhe */
-  left: 80vw; /* Links: 110% der Fensterbreite */
-  width: 190px; /* Breite: 15% der Fensterbreite */
-  height: 140px; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  background-color: #426b1f;
-  opacity: 0.1;
-  cursor: pointer;
-  user-select: none;
-}
-
-
-
-
-.bremse {
-  position: absolute;
-  top: 0vh; /* Oben: 5% der Fensterhöhe */
-  left: 0vw; /* Links: 70% der Fensterbreite */
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  cursor: pointer;
-  user-select: none;
-  }
-  .bremsetitel {
+  .element-titel {
     position: absolute;
-    top: 60.9vh; /* Oben: 55% der Fensterhöhe */
-  left: 62.5vw; /* Links: 120% der Fensterbreite */
-  font-weight: 300;
-  font-size: 20px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  cursor: pointer;
-  user-select: none;
+    top: 20.3px;
+    left: 25.7px;
+    font-size: 16px;
+    font-weight: 800;
+    display: inline-block;
+    width: 136px;
+    height: 15.4px;
+    cursor: pointer;
+    user-select: none;
   }
-  .bremse-value {
-    position: absolute;
-    top: 70.9vh; /* Oben: 55% der Fensterhöhe */
-  left: 62.6vw;
-  font-weight: 300;
-  font-size: 20px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 12vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh;/* Links: 125% der Fensterbreite */
-  }
-  .bremse-background {
-    position: absolute;
-  top: 60vh; /* Oben: 55% der Fensterhöhe */
-  left: 61.5vw; /* Links: 110% der Fensterbreite */
-  width: 190px; /* Breite: 15% der Fensterbreite */
-  height: 140px; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  background-color: #426b1f;
-  opacity: 0.1;
-  cursor: pointer;
-  user-select: none;
-}
-
-
-
-
-
-.geschwindigkeit {
+  .gang {
   position: absolute;
-  top: 0vh; /* Oben: 5% der Fensterhöhe */
-  left: 0vw; /* Links: 70% der Fensterbreite */
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
+  height: 100%;
+  width: 100%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  left: 880px;
   cursor: pointer;
   user-select: none;
-  }
-  .geschwindigkeittitel {
+  } 
+
+  .gang-value {
     position: absolute;
-    top: 60.9vh; /* Oben: 55% der Fensterhöhe */
-    left: 45vw;/* Links: 120% der Fensterbreite */
-    font-weight: 300;
-  font-size: 20px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  cursor: pointer;
-  user-select: none;
+    top: 40px;
+    left: 15px;
+    display: inline-block;
+    width: 43.6px;
+    height: 37.5px;
+    cursor: pointer;
+    user-select: none;
   }
-  .geschwindigkeit-value {
-    position: absolute;
-  top: 70.9vh; /* Oben: 55% der Fensterhöhe */
-  left: 45vw;
-  font-weight: 300;
-  font-size: 20px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh;/* Links: 125% der Fensterbreite */
-  }
-  .geschwindigkeit-background {
-    position: absolute;
-  top: 60vh; /* Oben: 55% der Fensterhöhe */
-  left: 44vw; /* Links: 110% der Fensterbreite */
-  width: 200px; /* Breite: 15% der Fensterbreite */
-  height: 140px; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  background-color: #426b1f;
-  opacity: 0.1;
-  cursor: pointer;
-  user-select: none;
-}
-
-
-
-.drehzahl {
-  position: absolute;
-  top: 0vh; /* Oben: 5% der Fensterhöhe */
-  left: 0vw; /* Links: 70% der Fensterbreite */
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  cursor: pointer;
-  user-select: none;
-  }
-  .drehlzahltitel {
-    position: absolute;
-    top: 60.9vh; /* Oben: 55% der Fensterhöhe */
-    left: 9.0vw;/* Links: 120% der Fensterbreite */
-    font-weight: 300;
-  font-size: 20px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  cursor: pointer;
-  user-select: none;
-  }
-  .drehzahl-value {
-    position: absolute;
-  top: 35.5vh; /* Oben: 55% der Fensterhöhe */
-  left: 4.5vw;
-  font-weight: 300;
-  font-size: 20px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh;/* Links: 125% der Fensterbreite */
-  }
-.drehzahl-background {
-  position: absolute;
-  top: 60vh; /* Oben: 55% der Fensterhöhe */
-  left: 8.0vw; /* Links: 110% der Fensterbreite */
-  width: 190px; /* Breite: 15% der Fensterbreite */
-  height: 140px; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  background-color: #426b1f;
-  opacity: 0.1;
-  cursor: pointer;
-  user-select: none;
-}
-
-
-
-
-
   
-.wasser-value {
-  position: absolute;
-  top: 70.9vh; /* Oben: 55% der Fensterhöhe */
-  left: 27.4vw;
-  font-weight: 300;
-  font-size: 20px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh;/* Links: 125% der Fensterbreite */
+  
+.element-background {
+  width: 187.3px;
+  height: 122.6px;
+  border-radius: 20px;
+  background-color: #426b1f;
+  opacity: 0.1;
+  cursor:pointer;
+  user-select: none;
+}
+
+
+  .bremse {
+    position: absolute;
+    top: 0px;
+    left: 660px;
+    width: 187.3px;
+    height: 122.6px;
+    cursor: pointer;
+    user-select: none;
   }
-  .oel-value {
-  position: absolute;
-  top: 35.5vh; /* Oben: 55% der Fensterhöhe */
-  left: 17.8vw;
-  font-weight: 300;
-  font-size: 20px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh;/* Links: 125% der Fensterbreite */
+  
+
+.bremse-value {
+    position: absolute;
+    top: 80px;
+    left: 25.3px;
+    display: inline-block;
+    width: 43.6px;
+    height: 37.5px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .speed {
+    position: absolute;
+    top: 0px;
+    left: 440px;
+    width: 187.3px;
+    height: 122.6px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .speed-value {
+    position: absolute;
+    top: 80px;
+    left: 25.3px;
+    display: inline-block;
+    width: 130px;
+    height: 37.5px;
+    cursor: pointer;
+    user-select: none;
   }
   .png-wasser-icon {
     position: absolute;
-    top: 60.7vh; /* Oben: 55% der Fensterhöhe */
-    left: 35.7vw;/* Links: 120% der Fensterbreite */
-  display: inline-block;
-  width: 40px; /* Breite: 15% der Fensterbreite */
-  height: 50px; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  cursor: pointer;
-  user-select: none;
+    top: 8px;
+    left: 138px;
+    width: 28px;
+    height: 37px;
+    object-fit: cover;
+    cursor: pointer;
+    user-select: none;
   }
   .png-oel-icon {
     position: absolute;
-    top: 60.5vh; /* Oben: 55% der Fensterhöhe */
-    left: 26.8vw;/* Links: 120% der Fensterbreite */
-  display: inline-block;
-  width: 70px; /* Breite: 15% der Fensterbreite */
-  height: 50px; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  cursor: pointer;
-  user-select: none;
+    top: 7px;
+    left: 10px;
+    width: 52px;
+    height: 37px;
+    object-fit: cover;
+    cursor: pointer;
+    user-select: none;
+  }
+  .wasser-value {
+    position: absolute;
+    top: 81px;
+    left: 135px;
+    display: inline-block;
+    width: 43.6px;
+    height: 37.5px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .oel-value {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    display: inline-block;
+    width: 43.6px;
+    height: 37.5px;
+    cursor: pointer;
+    user-select: none;
   }
   .oel-wasser {
     position: absolute;
-  top: 0vh; /* Oben: 5% der Fensterhöhe */
-  left: 0vw; /* Links: 70% der Fensterbreite */
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  cursor: pointer;
-  user-select: none;
+    top: 0px;
+    left: 220px;
+    width: 187.3px;
+    height: 122.6px;
+    cursor: pointer;
+    user-select: none;
   }
-.oelwasser-background {
-  position: absolute;
-  top: 60vh; /* Oben: 55% der Fensterhöhe */
-  left: 26.3vw; /* Links: 110% der Fensterbreite */
-  width: 190px; /* Breite: 15% der Fensterbreite */
-  height: 140px; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  background-color: #426b1f;
-  opacity: 0.1;
-  cursor: pointer;
-  user-select: none;
-}
 
+  .drehzahl {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 193px;
+    height: 125px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .drehzahl-value {
+    position: absolute;
+    top: 40px;
+    left: 15px;
+    display: inline-block;
+    width: 150px;
+    height: 37.5px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .home-otto-elemente {
+    position: absolute;
+    top: 550px;
+    left: 186px;
+    width: 1067.3px;
+    height: 125px;
+    font-size: 20px;
+    font-family: 'Manrope';
+    user-select: none;
+  }
+  .batterie-Wert-Hybrid {
+    position: absolute;
+    top: 480px;
+    left: 1271px;
+    background-color: rgba(255, 255, 255, 0);
+    width: 118px;
+    height: 32px;
+    color: rgba(255, 255, 255, 0.5);
+    user-select: none;
+  }
+  .png-batterie-icon {
+    position: absolute;
+    top: 485px;
+    left: 1226px;
+    width: 34px;
+    height: 27px;
+    object-fit: cover;
+    user-select: none;
+  }
+  .batterie-balken-hintergrund-hybrid {
+    position: absolute;
+    top: 480px;
+    left: 1008px;
+    border-radius: 56px;
+    width: 207px;
+    height: 32px;
+    user-select: none;
+  }
+  .batterie-balken-aktuell-hybrid {
+    position: absolute;
+    top: 482px;
+    left: 1011px;
+    border-radius: 56px;
+    width: 168px;
+    height: 28px;
+    user-select: none;
+  }
   
-.batterie-Wert-Hybrid {
-  position: absolute;
-  top: 48.3vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 74vw; /* Left-Position relativ zur Fensterbreite */
-  background-color: rgba(255, 255, 255, 0);
-  width: 10vw; /* Breite relativ zur Fensterbreite */
-  height: 2vh; /* Höhe relativ zur Fensterhöhe */
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  color: rgba(255, 255, 255, 0.5);
-  user-select: none;
-}
+  .tank-wert-hybrid{
+    position: absolute;
+    top: 461px;
+    left: 164px;
+    background-color: rgba(255, 255, 255, 0);
+    width: 118px;
+    height: 32px;
+    color: rgba(255, 255, 255, 0.5);
+    user-select: none;
+  }
 
-.png-batterie-icon {
-  position: absolute;
-  top: 49vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 77vw; /* Left-Position relativ zur Fensterbreite */
-  width: 2vw; /* Breite relativ zur Fensterbreite */
-  height: 2vh; /* Höhe relativ zur Fensterhöhe */
-  object-fit: cover;
-  user-select: none;
-}
+  .tank-volumen{
+    position: absolute;
+    top: 461px;
+    left: 220px;
+    background-color: rgba(255, 255, 255, 0);
+    width: 118px;
+    height: 32px;
+    color: rgba(255, 255, 255, 0.5);
+    user-select: none;
+  }
 
-.batterie-balken-hintergrund-hybrid {
-  position: absolute;
-  top: 48.6vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 78.5vw; /* Left-Position relativ zur Fensterbreite */
-  border-radius: 5vw; /* Border-Radius relativ zur Fensterbreite */
-  width: 13vw; /* Breite relativ zur Fensterbreite */
-  height: 3vh; /* Höhe relativ zur Fensterhöhe */
-  user-select: none;
-}
 
-.batterie-balken-aktuell-hybrid {
-  position: absolute;
-  top: 48.8vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 78.6vw; /* Left-Position relativ zur Fensterbreite */
-  border-radius: 5vw; /* Border-Radius relativ zur Fensterbreite */
-  width: 10.8vw; /* Breite relativ zur Fensterbreite */
-  height: 2.5vh; /* Höhe relativ zur Fensterhöhe */
-  user-select: none;
-}
-
- 
- 
-
+  .png-tank-icon-hybrid {
+    position: absolute;
+    top: 462px;
+    left: 140px;
+    width: 29px;
+    height: 25px;
+    object-fit: cover;
+    user-select: none;
+    color:#426b1f;
+  }
+  .tank-balken-hintergrund-hybrid {
+    position: absolute;
+    top: 411px;
+    left: 120px;
+    border-radius: 56px;
+    width: 1193px;
+    height: 46px;
+    user-select: none;
+  }
+  .tank-balken-aktuell-hybrid{
+    position: absolute;
+    top: 415px;
+    left: 124px;
+    border-radius: 56px;
+    transform-origin: top left;
+    transform: scaleX(0);
+    transition: transform 1s ease;
+    width: 1183px;
+    height: 39px;
+    user-select: none;
+  }
+  .png-auto-dashboard {
+    position: absolute;
+    top: 103px;
+    left: 385px;
+    width: 670px;
+    height: 287px;
+    object-fit: cover;
+    opacity: 1;
+    user-select: none;
+  }
   
-.tank-wert-hybrid {
-  position: absolute;
-  top: 48.3vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 11.8vw; /* Left-Position relativ zur Fensterbreite */
-  background-color: rgba(255, 255, 255, 0);
-  width: 10vw; /* Breite relativ zur Fensterbreite */
-  height: 3vh; /* Höhe relativ zur Fensterhöhe */
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  color: rgba(255, 255, 255, 0.5);
-  user-select: none;
+  .auto-titel {
+    position: absolute;
+    top: 130px;
+    left: 652px;
+    width: 200px;
+    height: 27px;
+    font-size: 20px;
+    user-select: none;
+  }
+  .motorhaube-text {
+    position: absolute;
+    height: 10px; 
+    width: 150px; 
+    top: 244px; 
+    left: 1229px; 
+    font-weight: 300;
+    display: inline-block;
+    user-select: none;
 }
 
-.tank-volumen {
-  position: absolute;
-  top: 48.3vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 14.9vw; /* Left-Position relativ zur Fensterbreite */
-  background-color: rgba(255, 255, 255, 0);
-  width: 10vw; /* Breite relativ zur Fensterbreite */
-  height: 3vh; /* Höhe relativ zur Fensterhöhe */
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  color: rgba(255, 255, 255, 0.5);
-  user-select: none;
-}
-
-.png-tank-icon-hybrid {
-  position: absolute;
-  top: 48.3vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 10vw; /* Left-Position relativ zur Fensterbreite */
-  width: 4vw; /* Breite relativ zur Fensterbreite */
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
-  object-fit: cover;
-  user-select: none;
-  color: #426b1f;
-}
-
-.tank-balken-hintergrund-hybrid {
-  position: absolute;
-  top: 41.4vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 18vw; /* Left-Position relativ zur Fensterbreite */
-  border-radius: 5vw; /* Border-Radius relativ zur Fensterbreite */
-  width: 62vw; /* Breite relativ zur Fensterbreite */
-  height: 4vh; /* Höhe relativ zur Fensterhöhe */
-  user-select: none;
-}
-
-.tank-balken-aktuell-hybrid {
-  position: absolute;
-  top: 41.8vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 18.5vw; /* Left-Position relativ zur Fensterbreite */
-  border-radius: 5vw; /* Border-Radius relativ zur Fensterbreite */
-  transform-origin: top left;
-  transform: scaleX(0);
-  transition: transform 1s ease;
-  width: 60.5vw; /* Breite relativ zur Fensterbreite */
-  height: 3.3vh; /* Höhe relativ zur Fensterhöhe */
-  user-select: none;
-}
-
-
-
-
-
-
-
-
-.motorhaube-text {
-  position: absolute;
-  height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 24%; 
-  left: 82%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
+.spoiler-closed {
+    position: absolute;
+    height: 10px; 
+    width: 65px; 
+    top: 270px; 
+    left: 1062px; 
+    font-weight: 300;
+    color: #426b1f;
+    text-align: center;
+    display: inline-block;
+    user-select: none;
 }
 
 .motorhaube-closed {
-  position: absolute;
-  height: 10px; 
-  width: 7.1vw; /* Breite relativ zur Fensterbreite */
-  top: 24%; 
-  left: 70%;
-  font-weight: 300;
-  color: #426b1f;
-  text-align: center;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
-}
-.spoiler-closed {
-  position: absolute;
-  height: 10px; 
-  width: 7.1vw; /* Breite relativ zur Fensterbreite */
-  top: 27%; 
-  left: 71%;
-  font-weight: 300;
-  color: #426b1f;
-  text-align: center;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
+    position: absolute;
+    height: 10px; 
+    width: 71px; 
+    top: 244px; 
+    left: 1131px; 
+    font-weight: 300;
+    color: #426b1f;
+    text-align: center;
+    display: inline-block;
+    user-select: none;
 }
 
 .spoiler-text {
-  position: absolute;
-  height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 27%; 
-  left: 82%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
+    position: absolute;
+    height: 10px; 
+    width: 57px; 
+    top: 270px; 
+    left: 1229px; 
+    font-weight: 300;
+    display: inline-block;
+    user-select: none;
 }
+
 .hupe-text {
-  position: absolute;
-  height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 24%; 
-  left: 10%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
+    position: absolute;
+    height: 10px; 
+    width: 50px; 
+    top: 244px; 
+    left: 124px; 
+    font-weight: 300;
+    display: inline-block;
+    user-select: none;
 }
+
 .hupe-aktiv {
     position: absolute;
-    height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 24%; 
-  left: 10%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
+    height: 10px; 
+    width: 43px; 
+    top: 244px; 
+    left: 210px; 
+    font-weight: 300;
     color: #426b1f;
     text-align: center;
     display: inline-block;
     user-select: none;
 }
+
 .abs-aktiv {
-  position: absolute;
-    height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 27%; 
-  left: 10%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
+    position: absolute;
+    height: 10px;
+    width: 43px; 
+    top: 270px; 
+    left: 210px; 
+    font-weight: 300;
     color: #426b1f;
     text-align: center;
     display: inline-block;
     user-select: none;
 }
+
 .abs-text {
-  position: absolute;
-  height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 27%; 
-  left: 10%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
+    position: absolute;
+    height: 10px; 
+    width: 32px; 
+    top: 270px; 
+    left: 124px; 
+    font-weight: 300;
+    display: inline-block;
+    user-select: none;
 }
 .bremse-aktiv {
-  position: absolute;
-    height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 30%; 
-  left: 10%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
+    position: absolute;
+    height: 10px;
+    width: 43px; 
+    top: 296px; 
+    left: 210px; 
+    font-weight: 300;
     color: #426b1f;
     text-align: center;
     display: inline-block;
     user-select: none;
 }
+
 .bremse-text {
-  position: absolute;
-  height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 30%; 
-  left: 10%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
+    position: absolute;
+    height: 10px; 
+    width: 32px; 
+    top: 296px; 
+    left: 124px; 
+    font-weight: 300;
+    display: inline-block;
+    user-select: none;
 }
-
-
-
 
 .element-background:hover {
     background-color: #2b3f00;
@@ -770,8 +680,8 @@
   .bremse:hover .element-background,
   .speed:hover .element-background,
   .oel-wasser:hover .element-background,
-  .gang:hover .element-background,
-  .drehzahl:hover .element-background {
+  .drehzahl:hover .element-background,
+  .gang:hover .element-background {
     background-color: #2b3f00;
   }
 
@@ -785,572 +695,7 @@
     color: #fff;
     font-family: 'Poppins';
   }
-  }
-
-
-  @media (max-width: 1200px) {
-
-
-
-
-    .png-auto-dashboard {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 36%;
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
-  opacity: 0.7;
-}
-
-
-.auto-titel {
-  position: absolute;
-  top: 15%; /* Zentrieren vertikal */
-  left: 50%; /* Zentrieren horizontal */
-  transform: translate(-50%, -50%);
-  font-weight: 600;
-  font-family: 'Poppins', sans-serif;
-  color: #fff;
-  white-space: nowrap; /* Verhindert, dass der Text umbrochen wird */
-}
-
-
-
-
-
-
-.gang {
-  position: absolute;
-  top: 0px; /* Oben: 5% der Fensterhöhe */
-  left: 0px; /* Links: 70% der Fensterbreite */
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  cursor: pointer;
-  user-select: none;
-}
-
-.gangtitel {
-  position: absolute;
-  top: 141vh; /* Oben: 55% der Fensterhöhe */
-  left: 30.0vw; /* Links: 120% der Fensterbreite */
-  font-weight: 300;
-  font-size: 14px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.gang-value {
-  position: absolute;
-  top: 76.5vh; /* Oben: 55% der Fensterhöhe */
-  left: 15.0vw;
-  font-weight: 300;
-  font-size: 14px;/* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh;/* Links: 125% der Fensterbreite */
-  /* Weitere Stile nach Bedarf */
-}
-
-.gang-background {
-  position: absolute;
-  top: 60vh; /* Oben: 55% der Fensterhöhe */
-  left: 25vw; /* Links: 110% der Fensterbreite */
-  width: 190px; /* Breite: 15% der Fensterbreite */
-  height: 140px; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  background-color: #426b1f;
-  opacity: 0.1;
-  cursor: pointer;
-  user-select: none;
-}
-
-
-
-
-.bremse {
-  position: absolute;
-  top: 0vh; /* Oben: 5% der Fensterhöhe */
-  left: 0vw; /* Links: 70% der Fensterbreite */
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  cursor: pointer;
-  user-select: none;
-  }
-  .bremsetitel {
-    position: absolute;
-    top: 120.9vh; /* Oben: 55% der Fensterhöhe */
-  left: 30vw; /* Links: 120% der Fensterbreite */
-  font-weight: 300;
-  font-size: 14px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  cursor: pointer;
-  user-select: none;
-  }
-  .bremse-value {
-    position: absolute;
-    top: 132.9vh; /* Oben: 55% der Fensterhöhe */
-  left: 30.0vw;
-  font-size: 14px;/* Schriftgröße relativ zur Fensterbreite */
-  font-weight: 300;
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh;/* Links: 125% der Fensterbreite */
-  }
-  .bremse-background {
-    position: absolute;
-  top: 80vh; /* Oben: 55% der Fensterhöhe */
-  left: 25vw;/* Links: 110% der Fensterbreite */
-  width: 190px; /* Breite: 15% der Fensterbreite */
-  height: 140px; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  background-color: #426b1f;
-  opacity: 0.1;
-  cursor: pointer;
-  user-select: none;
-}
-
-
-
-
-
-.geschwindigkeit {
-  position: absolute;
-  top: 0vh; /* Oben: 5% der Fensterhöhe */
-  left: 0vw; /* Links: 70% der Fensterbreite */
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  cursor: pointer;
-  user-select: none;
-  }
-  .geschwindigkeittitel {
-    position: absolute;
-    top: 100.9vh; /* Oben: 55% der Fensterhöhe */
-    left: 30vw; /* Links: 120% der Fensterbreite */
-  font-weight: 300;
-  font-size: 14px;  /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  cursor: pointer;
-  user-select: none;
-  }
-  .geschwindigkeit-value {
-    position: absolute;
-    top: 112.9vh; /* Oben: 55% der Fensterhöhe */
-  left: 30.0vw;
-  font-size: 14px;/* Schriftgröße relativ zur Fensterbreite */
-  font-weight: 300; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh;/* Links: 125% der Fensterbreite */
-  }
-  .geschwindigkeit-background {
-    position: absolute;
-  top: 100vh; /* Oben: 55% der Fensterhöhe */
-  left: 25vw; /* Links: 110% der Fensterbreite */
-  width: 190px; /* Breite: 15% der Fensterbreite */
-  height: 140px; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  background-color: #426b1f;
-  opacity: 0.1;
-  cursor: pointer;
-  user-select: none;
-}
-
-
-
-.drehzahl {
-  position: absolute;
-  top: 0vh; /* Oben: 5% der Fensterhöhe */
-  left: 0vw; /* Links: 70% der Fensterbreite */
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  cursor: pointer;
-  user-select: none;
-  }
-  .drehlzahltitel {
-    position: absolute;
-    top: 60.9vh; /* Oben: 55% der Fensterhöhe */
-    left: 30vw;/* Links: 120% der Fensterbreite */
-    font-weight: 300;
-  font-size: 14px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  cursor: pointer;
-  user-select: none;
-  }
-  .drehzahl-value {
-    position: absolute;
-  top: 36.5vh; /* Oben: 55% der Fensterhöhe */
-  left: 15vw;
-  font-weight: 300;
-  font-size: 12px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh;/* Links: 125% der Fensterbreite */
-  }
-.drehzahl-background {
-  position: absolute;
-  top: 120vh; /* Oben: 55% der Fensterhöhe */
-  left: 25vw; /* Links: 110% der Fensterbreite */
-  width: 190px; /* Breite: 15% der Fensterbreite */
-  height: 140px; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  background-color: #426b1f;
-  opacity: 0.1;
-  cursor: pointer;
-  user-select: none;
-}
-
-
-
-
-
-  
-.wasser-value {
-  position: absolute;
-  top: 93vh; /* Oben: 55% der Fensterhöhe */
-  left: 64.4vw;
-  font-weight: 300;
-  font-size: 12px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh;/* Links: 125% der Fensterbreite */
-  }
-  .oel-value {
-  position: absolute;
-  top: 46.5vh; /* Oben: 55% der Fensterhöhe */
-  left: 14.8vw;
-  font-weight: 300;
-  font-size: 12px; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh;/* Links: 125% der Fensterbreite */
-  }
-  .png-wasser-icon {
-    position: absolute;
-    top: 80.7vh; /* Oben: 55% der Fensterhöhe */
-    left: 62.7vw;/* Links: 120% der Fensterbreite */
-  display: inline-block;
-  width: 8vw; /* Breite: 15% der Fensterbreite */
-  height: 5vh; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  cursor: pointer;
-  user-select: none;
-  }
-  .png-oel-icon {
-    position: absolute;
-    top: 80.5vh; /* Oben: 55% der Fensterhöhe */
-    left: 26.8vw;/* Links: 120% der Fensterbreite */
-  display: inline-block;
-  width: 13vw; /* Breite: 15% der Fensterbreite */
-  height: 5vh; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  cursor: pointer;
-  user-select: none;
-  }
-  .oel-wasser {
-    position: absolute;
-  top: 0vh; /* Oben: 5% der Fensterhöhe */
-  left: 0vw; /* Links: 70% der Fensterbreite */
-  width: 15vw; /* Breite: 15% der Fensterbreite */
-  height: 10vh; /* Höhe: 10% der Fensterhöhe */
-  cursor: pointer;
-  user-select: none;
-  }
-.oelwasser-background {
-  position: absolute;
-  top: 140vh; /* Oben: 55% der Fensterhöhe */
-  left: 25vw; /* Links: 110% der Fensterbreite */
-  width: 190px; /* Breite: 15% der Fensterbreite */
-  height: 140px; /* Höhe: 10% der Fensterhöhe */
-  border-radius: 20px;
-  background-color: #426b1f;
-  opacity: 0.1;
-  cursor: pointer;
-  user-select: none;
-}
-
-  
-.batterie-Wert-Hybrid {
-  position: absolute;
-  top: 48.3vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 74vw; /* Left-Position relativ zur Fensterbreite */
-  background-color: rgba(255, 255, 255, 0);
-  width: 10vw; /* Breite relativ zur Fensterbreite */
-  height: 2vh; /* Höhe relativ zur Fensterhöhe */
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  color: rgba(255, 255, 255, 0.5);
-  user-select: none;
-}
-
-.png-batterie-icon {
-  position: absolute;
-  top: 49vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 77vw; /* Left-Position relativ zur Fensterbreite */
-  width: 2vw; /* Breite relativ zur Fensterbreite */
-  height: 2vh; /* Höhe relativ zur Fensterhöhe */
-  object-fit: cover;
-  user-select: none;
-}
-
-.batterie-balken-hintergrund-hybrid {
-  position: absolute;
-  top: 48.6vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 78.5vw; /* Left-Position relativ zur Fensterbreite */
-  border-radius: 5vw; /* Border-Radius relativ zur Fensterbreite */
-  width: 13vw; /* Breite relativ zur Fensterbreite */
-  height: 3vh; /* Höhe relativ zur Fensterhöhe */
-  user-select: none;
-}
-
-.batterie-balken-aktuell-hybrid {
-  position: absolute;
-  top: 48.8vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 78.6vw; /* Left-Position relativ zur Fensterbreite */
-  border-radius: 5vw; /* Border-Radius relativ zur Fensterbreite */
-  width: 10.8vw; /* Breite relativ zur Fensterbreite */
-  height: 2.5vh; /* Höhe relativ zur Fensterhöhe */
-  user-select: none;
-}
 
  
- 
-
-  
-.tank-wert-hybrid {
-  position: absolute;
-  top: 48.3vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 11.8vw; /* Left-Position relativ zur Fensterbreite */
-  background-color: rgba(255, 255, 255, 0);
-  width: 10vw; /* Breite relativ zur Fensterbreite */
-  height: 3vh; /* Höhe relativ zur Fensterhöhe */
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  color: rgba(255, 255, 255, 0.5);
-  user-select: none;
-}
-
-.tank-volumen {
-  position: absolute;
-  top: 48.3vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 14.9vw; /* Left-Position relativ zur Fensterbreite */
-  background-color: rgba(255, 255, 255, 0);
-  width: 10vw; /* Breite relativ zur Fensterbreite */
-  height: 3vh; /* Höhe relativ zur Fensterhöhe */
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  color: rgba(255, 255, 255, 0.5);
-  user-select: none;
-}
-
-.png-tank-icon-hybrid {
-  position: absolute;
-  top: 48.3vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 10vw; /* Left-Position relativ zur Fensterbreite */
-  width: 4vw; /* Breite relativ zur Fensterbreite */
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
-  object-fit: cover;
-  user-select: none;
-  color: #426b1f;
-}
-
-.tank-balken-hintergrund-hybrid {
-  position: absolute;
-  top: 41.4vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 18vw; /* Left-Position relativ zur Fensterbreite */
-  border-radius: 5vw; /* Border-Radius relativ zur Fensterbreite */
-  width: 62vw; /* Breite relativ zur Fensterbreite */
-  height: 4vh; /* Höhe relativ zur Fensterhöhe */
-  user-select: none;
-}
-
-.tank-balken-aktuell-hybrid {
-  position: absolute;
-  top: 41.8vh; /* Top-Position relativ zur Fensterhöhe */
-  left: 18.5vw; /* Left-Position relativ zur Fensterbreite */
-  border-radius: 5vw; /* Border-Radius relativ zur Fensterbreite */
-  transform-origin: top left;
-  transform: scaleX(0);
-  transition: transform 1s ease;
-  width: 60.5vw; /* Breite relativ zur Fensterbreite */
-  height: 3.3vh; /* Höhe relativ zur Fensterhöhe */
-  user-select: none;
-}
-
-
-
-
-
-
-
-
-.motorhaube-text {
-  position: absolute;
-  height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 24%; 
-  left: 82%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
-}
-
-.motorhaube-closed {
-  position: absolute;
-  height: 10px; 
-  width: 7.1vw; /* Breite relativ zur Fensterbreite */
-  top: 24%; 
-  left: 70%;
-  font-weight: 300;
-  color: #426b1f;
-  text-align: center;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
-}
-.spoiler-closed {
-  position: absolute;
-  height: 10px; 
-  width: 7.1vw; /* Breite relativ zur Fensterbreite */
-  top: 27%; 
-  left: 71%;
-  font-weight: 300;
-  color: #426b1f;
-  text-align: center;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
-}
-
-.spoiler-text {
-  position: absolute;
-  height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 27%; 
-  left: 82%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
-}
-.hupe-text {
-  position: absolute;
-  height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 24%; 
-  left: 10%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
-}
-.hupe-aktiv {
-    position: absolute;
-    height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 24%; 
-  left: 10%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-    color: #426b1f;
-    text-align: center;
-    display: inline-block;
-    user-select: none;
-}
-.abs-aktiv {
-  position: absolute;
-    height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 27%; 
-  left: 10%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-    color: #426b1f;
-    text-align: center;
-    display: inline-block;
-    user-select: none;
-}
-.abs-text {
-  position: absolute;
-  height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 27%; 
-  left: 10%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
-}
-.bremse-aktiv {
-  position: absolute;
-    height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 30%; 
-  left: 10%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-    color: #426b1f;
-    text-align: center;
-    display: inline-block;
-    user-select: none;
-}
-.bremse-text {
-  position: absolute;
-  height: 1px; 
-  width: 15vw; /* Breite relativ zur Fensterbreite */
-  top: 30%; 
-  left: 10%; 
-  font-weight: 300;
-  font-size: 1.4vw; /* Schriftgröße relativ zur Fensterbreite */
-  display: inline-block;
-  user-select: none;
-}
-
-
-
-
-.element-background:hover {
-    background-color: #2b3f00;
-  }
-
-  /* Du kannst dies für andere Container wiederholen, indem du die entsprechenden Klassen hinzufügst */
-  .bremse:hover .element-background,
-  .speed:hover .element-background,
-  .oel-wasser:hover .element-background,
-  .gang:hover .element-background,
-  .drehzahl:hover .element-background {
-    background-color: #2b3f00;
-  }
-
-  .home-dashboard-hybrid {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    text-align: left;
-    font-size:  21px;
-    color: #fff;
-    font-family: 'Poppins';
-  }
-  }
-
  
 </style>

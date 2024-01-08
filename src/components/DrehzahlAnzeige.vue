@@ -44,7 +44,7 @@ export default {
     // Setze die Aktualisierung alle 5 Sekunden (5000 Millisekunden)
     setInterval(() => {
       this.fetchrpmValue();
-    }, 5000);
+    }, 2000);
 
     // Führe fetchData einmal bei der Initialisierung aus
     this.fetchrpmValue();

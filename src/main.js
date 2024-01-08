@@ -44,7 +44,6 @@ import Tank from "./pages/Tank.vue";
 import Temperaturen from "./pages/Temperaturen.vue";
 import Trips from "./pages/Trips.vue";
 import Bremsen from "./pages/Bremsen.vue";
-import Motor from "./pages/Motor.vue";
 import Hoehe from "./pages/Hoehe.vue";
 import NotFound from "./pages/NotFound.vue";
 
@@ -189,15 +188,6 @@ const routes = [
     meta: {
       requiresAuth: true,
       title: "Bremstemperaturen"
-    },
-  },
-  {
-    path: "/motor",
-    name: "Motor",
-    component: Motor,
-    meta: {
-      requiresAuth: true,
-      title: "Motor"
     },
   },
   {

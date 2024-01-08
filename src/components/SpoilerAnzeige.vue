@@ -8,6 +8,7 @@ export default {
     return {
       spoilerValue: null,
       spoilerStatus: null,
+      updateInterval: null, // Variable für das Aktualisierungsintervall
     };
   },
   methods: {
@@ -22,19 +23,29 @@ export default {
           this.spoilerValue = spoilerValue;
           this.spoilerStatus = spoilerValue === 0.0 ? "EINGEFAHREN" : "AUSGEFAHREN";
         } else {
-          console.error("Invalid value for spoiler:", data.messwerte[0]?.spoilerR);
-          // Set spoilerStatus to null to display "N/A"
+          console.error("Ungültiger Wert für Spoiler:", data.messwerte[0]?.spoilerR);
+          // Setze spoilerStatus auf null, um "N/A" anzuzeigen
           this.spoilerStatus = null;
         }
       } catch (error) {
-        console.error("Error loading spoiler data:", error);
-        // Set spoilerStatus to null to display "N/A"
+        console.error("Fehler beim Laden der Spoiler-Daten:", error);
+        // Setze spoilerStatus auf null, um "N/A" anzuzeigen
         this.spoilerStatus = null;
       }
     },
   },
   mounted() {
+    // Starte das Aktualisierungsintervall
+    this.updateInterval = setInterval(() => {
+      this.fetchSpoilerStatus();
+    }, 2000);
+
+    // Führe fetchSpoilerStatus einmal bei der Initialisierung aus
     this.fetchSpoilerStatus();
+  },
+  beforeDestroy() {
+    // Beende das Aktualisierungsintervall, um Speicherlecks zu vermeiden
+    clearInterval(this.updateInterval);
   },
 };
 </script>

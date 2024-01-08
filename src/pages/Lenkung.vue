@@ -7,10 +7,10 @@
   </div>
   <div class="lenkung-value"><LenkungAnzeige/></div>
   <img
-    class="png-auto"
-    alt=""
-    src="/png-auto-dashboard@2x.png"
-  />
+      class="png-auto"
+      alt=""
+      :src="getImagePath"
+    />
   <div class="auto-titel">Porsche 911</div>
     
 
@@ -21,12 +21,17 @@ import { defineComponent } from "vue";
 import Navigation from '../components/Navigation.vue';
 import LenkungAnzeige from "../components/LenkungAnzeige.vue";
 import ChartLenkung from "../components/ChartLenkung.vue";
-
+import store from "../store/store";
 
 
 export default defineComponent({
   name: "Lenkung",
   components: { LenkungAnzeige, ChartLenkung, Navigation },
+  computed: {
+    getImagePath() {
+      return store.getters.getImagePath;
+      },
+    },
   methods: {
     goBack() {
     // Navigiere zur vorherigen Seite

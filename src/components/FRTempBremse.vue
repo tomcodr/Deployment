@@ -40,7 +40,7 @@ export default {
   mounted() {
     setInterval(() => {
       this.fetchBrakeTemperatureValue();
-    }, 5000);
+    }, 2000);
 
     this.fetchBrakeTemperatureValue();
   },

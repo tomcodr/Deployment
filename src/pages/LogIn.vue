@@ -4,7 +4,7 @@
     <form @submit.prevent="login">
       <h1>Login {{ firstName }}</h1>
       <div class="input-box">
-        <input v-model="email" type="text" placeholder="Email" required>
+        <input v-model="email" type="email" placeholder="Email" required>
       </div>
       <div class="input-box">
         <input v-model="password" type="password" placeholder="Password" required>
@@ -38,7 +38,7 @@ const login = () => {
   signInWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((data) => {
       console.log("Succesfully signed in!");
-      router.push('/')
+      router.push('/fahrzeughinzufuegen')
     })
     .catch((error) => {
       handleAuthError(error);

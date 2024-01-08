@@ -9,10 +9,10 @@
       <container class = "chart-wasser"><ChartOel/></container>
   
       <img
-        class="png-auto-dashboard-icon4"
-        alt=""
-        src="/png-auto-dashboard@2x.png"
-      />
+      class="png-auto-dashboard-icon4"
+      alt=""
+      :src="getImagePath"
+    />
       
       <img class="wasser-icon" alt="" src="/png-wasser-icon@2x.png" />
       <div class="wasser-value"><WasserTemperaturAnzeige/></div>
@@ -30,11 +30,16 @@
     import Navigation from '../components/Navigation.vue';
     import WasserTemperaturAnzeige from "../components/WasserTemperaturAnzeige.vue";
     import ChartOel from "../components/ChartOel.vue";
-  
+    import store from '../store/store';
   
     export default defineComponent({
       name: "Temperaturen",
       components: { WasserTemperaturAnzeige, ChartOel, Navigation },
+      computed: {
+    getImagePath() {
+      return store.getters.getImagePath;
+    },
+  },
       methods: {
         goBack() {
         // Navigiere zur vorherigen Seite

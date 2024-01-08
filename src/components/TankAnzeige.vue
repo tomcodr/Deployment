@@ -8,6 +8,7 @@ export default {
     return {
       fuelVolume: 0,
       fuelVolumePercentage: null,
+      updateInterval: null, // Variable für das Aktualisierungsintervall
     };
   },
   methods: {
@@ -40,7 +41,17 @@ export default {
     },
   },
   mounted() {
+    // Starte das Aktualisierungsintervall
+    this.updateInterval = setInterval(() => {
+      this.fetchFuelVolume();
+    }, 2000);
+
+    // Führe fetchFuelVolume einmal bei der Initialisierung aus
     this.fetchFuelVolume();
+  },
+  beforeDestroy() {
+    // Beende das Aktualisierungsintervall, um Speicherlecks zu vermeiden
+    clearInterval(this.updateInterval);
   },
 };
 </script>
