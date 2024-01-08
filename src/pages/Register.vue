@@ -1,0 +1,253 @@
+<template>
+ 
+
+  <body>
+<div class="wrapper">
+  <form @submit.prevent="submitForm">
+    <h1>Registration</h1>
+
+
+  <div @click="goBack" class="arrow"><i class='bx bx-left-arrow-alt'></i></div>
+
+
+    <div class="input-box">
+      <div class="input-field">
+        <input type="text" v-model="Name" placeholder="Name" required>
+        <i class='bx bxs-user'></i>
+      </div>
+      <div class="input-field">
+        <input type="text" v-model="Surname" placeholder="Surname" required>
+        <i class='bx bxs-user'></i>
+      </div>
+    </div>
+
+    <div class="input-box">
+      <div class="input-field">
+        <input type="email" v-model="email" placeholder="Email" required>
+        <i class='bx bxs-envelope'></i>
+      </div>
+     <div class="input-field">
+    <input type="tel" v-model="phoneNumber" placeholder="Phone Number" required>
+    <i class='bx bxs-phone'></i>
+</div>
+
+    </div>
+
+    <div class="input-box">
+      <div class="input-field">
+        <input type="password" v-model="password" placeholder="Password" required>
+        <i class='bx bxs-lock-alt' ></i>
+      </div>
+      <div class="input-field">
+        <input type="password" v-model="confirmPassword" placeholder="Confirm Password" required>
+        <i class='bx bxs-lock-alt' ></i>
+      </div>
+    </div>
+
+    <label>
+      <input type="checkbox" v-model="declaration">I hereby declare that the above provided information is true and correct
+    </label>
+    <button @click="register" type="submit" class="btn" required>Register</button>
+    <button @click="signInWithGoogle" class="btnGoogle"><i class='bx bxl-google'></i>Sign In With Google</button>
+  </form>
+</div>
+
+</body>
+</template>
+
+<script setup>
+
+import {ref} from "vue";
+import {getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,} from "firebase/auth";
+import {useRouter} from 'vue-router'
+
+
+
+const email = ref("");
+const password = ref("");
+const router = useRouter();
+const auth = getAuth(); // Add this line to get the auth instance
+
+
+const register = () =>{
+createUserWithEmailAndPassword(getAuth(), email.value, password.value)
+.then((data) =>{
+  console.log("Succesfully registered");
+
+console.log(auth.currentUser);
+
+router.push('/login')
+})
+.catch((error)=>{
+  console.log(error.code);
+  alert(error.message);
+});
+
+
+
+
+};
+
+const goBack = () =>{
+  router.go(-1)
+}
+
+const signInWithGoogle = () => {
+const provider = new GoogleAuthProvider();
+signInWithPopup(getAuth(), provider)
+.then((result) =>{
+console.log(result.user);
+router.push('/');
+})
+.catch((error) =>[
+
+])
+
+
+
+}
+
+</script>
+
+<style scoped>
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Manrope', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('/login-hintergrund.png') no-repeat;
+  background-size: cover;
+  background-position: center;
+
+}
+
+.wrapper {
+  width: 750px;
+  background: rgba(255, 255, 255, .1);
+  border: 2px solid rgba(255, 255, 255, .2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  backdrop-filter: blur(50px);
+  border-radius: 10px;
+  color: #fff;
+  padding: 40px 35px 55px;
+  margin: 0 10px;
+}
+
+.wrapper h1 {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.wrapper .input-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.input-box .input-field {
+  position: relative;
+  width: 48%;
+  width: 50%;
+  margin: 13px 0;
+}
+
+.input-box .input-field input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .2);
+  outline: none;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 6px;
+  padding: 15px 15px 15px 40px;
+}
+
+.input-box .input-field input::placeholder {
+  color: #fff;
+}
+
+.input-box .input-field i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+.wrapper label {
+  display: inline-block;
+  font-size: 14.5px;
+  margin: 10px 0 23px;
+}
+
+.wrapper label input {
+  accent-color: #fff;
+  margin-right: 5px;
+}
+
+
+.wrapper .btn {
+  width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  color: #333;
+  font-weight: 600;
+}
+.wrapper .btn:hover{
+  background: #2a9aba;
+}
+.wrapper .btnGoogle {
+  width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  color: #333;
+  font-weight: 600;
+  margin-top: 15px;
+}
+.wrapper .btnGoogle:hover{
+  background: #2a9aba;
+}
+.arrow {
+  position: absolute;
+  top: 9%;
+  left: 10%;
+  font-size: 30px;
+  font-weight: 600;
+  font-family: 'Poppins';
+  color: #fff;
+  cursor: pointer;
+}
+.arrow:hover{
+color:#426b1f;
+}
+
+@media(max-width: 576px) {
+  .input-box .input-field {
+      width: 100%;
+      margin: 10px 0;
+  }
+}
+</style>
