@@ -278,7 +278,7 @@ background-repeat: no-repeat;
   display: none;
 }
 
-/BREAKPOINTS/
+
 
 @media (max-width: 992px) {
   .header {
