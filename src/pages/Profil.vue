@@ -1,71 +1,37 @@
+// Annahme: Dies ist ein Vue-Komponenten-Script, z.B., "MeinKomponente.vue"
+
 <template>
-  <div>
-    <h1>Profilseite</h1>
-    <div v-if="userData">
-      <div class="icon"><i class='bx bxs-user'></i></div>
-      <p class="text-name"><strong>Name:</strong> {{ user.value }}</p>
-      <p class="text-email"><strong>Email:</strong> {{ user.email }}</p>
-      <p class="text-number"><strong>Telefonnummer:</strong> {{ userData.phoneNumber }}</p>
-    </div>
-  </div>
+  <!-- Deine Vue-Komponenten-Templateteile hier -->
+  <button @click="datenSpeichern">Daten speichern</button>
 </template>
 
-<script setup>
-import { ref, onMounted } from "vue";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+<script>
+// Importiere die benötigten Firebase-Funktionen
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
-const auth = getAuth();
-const user = ref(null);
-const userData = ref(null);
+export default {
+  methods: {
+    async datenSpeichern() {
+      // Hole die Firestore-Referenz
+      const db = getFirestore(this.$firebaseApp);
+      const beispielSammlung = collection(db, 'Beispiel');
 
-onMounted(() => {
-  onAuthStateChanged(auth, (authUser) => {
-    if (authUser) {
-      user.value = authUser;
-
-      // Hier ein beispielhafter Code, um weitere Benutzerdaten zu laden
-      // Beachten Sie, dass Sie dies an Ihre tatsächliche Datenstruktur anpassen müssen
-      userData.value = {
-       
+      // Daten, die du speichern möchtest
+      const daten = {
+        name: 'Beispielname',
+        wert: 42,
+        // Weitere Felder hier...
       };
+
+      // Füge die Daten zur Sammlung hinzu
+      const dokumentReferenz = await addDoc(beispielSammlung, daten);
+
+      console.log('Daten erfolgreich hinzugefügt mit der ID:', dokumentReferenz.id);
     }
-  });
-});
+  }
+}
 </script>
 
-<style scoped>
-.icon {
-  position: absolute;
-  top: 8%;
-  left: 30%;
-  font-size: 100px;
-  color: #fff;
-}
-.text-name {
-  position: absolute;
-  font-size: 24px;
-  font-family: Manrope;
-  top: 30%;
-  left: 30%;
-  color: #fff;
-}
-
-.text-email {
-  position: absolute;
-  font-size: 24px;
-  font-family: Manrope;
-  top: 50%;
-  left: 30%;
-  color: #fff;
-}
-.text-number {
-  position: absolute;
-  font-size: 24px;
-  font-family: Manrope;
-  top: 60%;
-  left: 30%;
-  color: #fff;
-}
-
-
+<style>
+/* Deine Vue-Komponenten-Stilregeln hier */
 </style>
