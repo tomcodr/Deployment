@@ -1,5 +1,5 @@
 <template>
-    <div class="steering-value">{{ steeringValue !== null ? steeringValue + "°" : $t('N/A') }}</div>
+    <div class="steering-value">{{ steeringValue !== null ? steeringValue + "°" : 'N/A' }}</div>
   </template>
   
   <script>

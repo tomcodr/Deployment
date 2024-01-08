@@ -51,168 +51,163 @@ import NotFound from "./pages/NotFound.vue";
 
 
 import "./global.css";
-import i18n from './i18n';  // Anpassen des Pfads entsprechend deiner Ordnerstruktur
 
 
 
 const routes = [
+
   {
-    path: "/:lang?",
-    component: RouterView,
-    children: [{
-      path: "",
-      name: "HomeDashboardHybrid",
-      component: HomeDashboardHybrid,
-      meta: {
-        requiresAuth: true,
-        title: "Dashboard"
-      },
+    path: "",
+    name: "HomeDashboardHybrid",
+    component: HomeDashboardHybrid,
+    meta: {
+      requiresAuth: true,
+      title: "Dashboard"
     },
-    {
-      path: "fahrzeuge",
-      name: "Fahrzeuge",
-      component: Fahrzeuge,
-      meta: {
-        requiresAuth: true,
-        title: "Fahrzeuge"
-      },
+  },
+  {
+    path: "/fahrzeuge",
+    name: "Fahrzeuge",
+    component: Fahrzeuge,
+    meta: {
+      requiresAuth: true,
+      title: "Fahrzeuge"
     },
-    {
-      path: "profil",
-      name: "Profil",
-      component: Profil,
-      meta: {
-        requiresAuth: true,
-        title: "Benutzerprofil"
-      },
+  },
+  {
+    path: "/profil",
+    name: "Profil",
+    component: Profil,
+    meta: {
+      requiresAuth: true,
+      title: "Benutzerprofil"
     },
-    {
-      path: "fahrzeughinzufuegen",
-      name: "FahrzeugHinzufuegen",
-      component: FahrzeugHinzufuegen,
-      meta: {
-        requiresAuth: true,
-        title: "Hinzufügen eines neuen Fahrzeugs"
-      },
+  },
+  {
+    path: "/fahrzeughinzufuegen",
+    name: "FahrzeugHinzufuegen",
+    component: FahrzeugHinzufuegen,
+    meta: {
+      requiresAuth: true,
+      title: "Hinzufügen eines neuen Fahrzeugs"
     },
-    {
-      path: "login",
-      name: "LogIn",
-      component: LogIn,
-      meta: {
-        title: "Login"
-      },
+  },
+  {
+    path: "/login",
+    name: "LogIn",
+    component: LogIn,
+    meta: {
+      title: "Login"
     },
-    {
-      path: "register",
-      name: "Register",
-      component: Register,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
+  },
+  {
+    path: "/hilfe",
+    name: "Hilfe",
+    component: Hilfe,
+  },
+  {
+    path: "/layout",
+    name: "Layout",
+    component: Layout,
+    meta: {
+      requiresAuth: true,
+      title: "Layout"
     },
-    {
-      path: "hilfe",
-      name: "Hilfe",
-      component: Hilfe,
+  },
+  {
+    path: "/gang",
+    name: "Gang",
+    component: Gang,
+    meta: {
+      requiresAuth: true,
+      title: "Gang"
     },
-    {
-      path: "layout",
-      name: "Layout",
-      component: Layout,
-      meta: {
-        requiresAuth: true,
-        title: "Layout"
-      },
+  },
+  {
+    path: "/lenkung",
+    name: "Lenkung",
+    component: Lenkung,
+    meta: {
+      requiresAuth: true,
+      title: "Lenkung"
     },
-    {
-      path: "gang",
-      name: "Gang",
-      component: Gang,
-      meta: {
-        requiresAuth: true,
-        title: "Gang"
-      },
+  },
+  {
+    path: "/drehzahl",
+    name: "Drehzahl",
+    component: Drehzahl,
+    meta: {
+      requiresAuth: true,
+      title: "Drehzahl"
     },
-    {
-      path: "lenkung",
-      name: "Lenkung",
-      component: Lenkung,
-      meta: {
-        requiresAuth: true,
-        title: "Lenkung"
-      },
+  },
+  {
+    path: "/geschwindigkeit",
+    name: "Geschwindigkeit",
+    component: Geschwindigkeit,
+    meta: {
+      requiresAuth: true,
+      title: "Geschwindigkeit"
     },
-    {
-      path: "drehzahl",
-      name: "Drehzahl",
-      component: Drehzahl,
-      meta: {
-        requiresAuth: true,
-        title: "Drehzahl"
-      },
+  },
+  {
+    path: "/tank",
+    name: "Tank",
+    component: Tank,
+    meta: {
+      requiresAuth: true,
+      title: "Tank"
     },
-    {
-      path: "geschwindigkeit",
-      name: "Geschwindigkeit",
-      component: Geschwindigkeit,
-      meta: {
-        requiresAuth: true,
-        title: "Geschwindigkeit"
-      },
+  },
+  {
+    path: "/temperaturen",
+    name: "Temperaturen",
+    component: Temperaturen,
+    meta: {
+      requiresAuth: true,
+      title: "Öl und Wassertemperatur"
     },
-    {
-      path: "tank",
-      name: "Tank",
-      component: Tank,
-      meta: {
-        requiresAuth: true,
-        title: "Tank"
-      },
+  },
+  {
+    path: "/trips",
+    name: "Trips",
+    component: Trips,
+    meta: {
+      requiresAuth: true,
+      title: "Trips"
     },
-    {
-      path: "temperaturen",
-      name: "Temperaturen",
-      component: Temperaturen,
-      meta: {
-        requiresAuth: true,
-        title: "Öl und Wassertemperatur"
-      },
+  },
+  {
+    path: "/bremsen",
+    name: "Bremsen",
+    component: Bremsen,
+    meta: {
+      requiresAuth: true,
+      title: "Bremstemperaturen"
     },
-    {
-      path: "trips",
-      name: "Trips",
-      component: Trips,
-      meta: {
-        requiresAuth: true,
-        title: "Trips"
-      },
+  },
+  {
+    path: "/motor",
+    name: "Motor",
+    component: Motor,
+    meta: {
+      requiresAuth: true,
+      title: "Motor"
     },
-    {
-      path: "bremsen",
-      name: "Bremsen",
-      component: Bremsen,
-      meta: {
-        requiresAuth: true,
-        title: "Bremstemperaturen"
-      },
+  },
+  {
+    path: "/hoehe",
+    name: "Hoehe",
+    component: Hoehe,
+    meta: {
+      requiresAuth: true,
+      title: "Höhe"
     },
-    {
-      path: "motor",
-      name: "Motor",
-      component: Motor,
-      meta: {
-        requiresAuth: true,
-        title: "Motor"
-      },
-    },
-    {
-      path: "hoehe",
-      name: "Hoehe",
-      component: Hoehe,
-      meta: {
-        requiresAuth: true,
-        title: "Höhe"
-      },
-    },
-    ],
   },
   {
     path: "/404",
@@ -254,9 +249,7 @@ router.beforeEach(async (toRoute, fromRoute, next) => {
   } else {
     next();
   }
-  const lang = toRoute.params.lang || store.getters.getSelectedLanguage || 'de';
-  store.dispatch('updateSelectedLanguage', lang);
-  i18n.global.locale.value = lang;
+
 
   const documentTitle =
     toRoute?.meta && toRoute?.meta?.title ? toRoute?.meta?.title : "CT";
@@ -279,9 +272,7 @@ const addMetaTag = (value) => {
   }
 };
 
-const selectedLanguage = store.getters.getSelectedLanguage || 'de';
-store.dispatch('updateSelectedLanguage', selectedLanguage);
 
-createApp(App).use(i18n).use(router).use(store).mount("#app");
+createApp(App).use(router).use(store).mount("#app");
 
 export default router;

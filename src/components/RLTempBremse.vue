@@ -1,5 +1,5 @@
 <template>
-  <b :class="{ 'brake-temperature-value': true, 'yellow-text': brakeTemperatureValue >= 300 && brakeTemperatureValue < 400, 'red-text': brakeTemperatureValue >= 400 }">{{ brakeTemperatureValue !== null ? `${brakeTemperatureValue}°` : $t('N/A') }}</b>
+  <b :class="{ 'brake-temperature-value': true, 'yellow-text': brakeTemperatureValue >= 300 && brakeTemperatureValue < 400, 'red-text': brakeTemperatureValue >= 400 }">{{ brakeTemperatureValue !== null ? `${brakeTemperatureValue}°` : 'N/A' }}</b>
 </template>
 
 <style>

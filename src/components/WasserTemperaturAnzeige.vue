@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b class="water-temperature">{{ waterTemperature !== null ? waterTemperature : $t('N/A') }}</b>
+    <b class="water-temperature">{{ waterTemperature !== null ? waterTemperature : 'N/A' }}</b>
   </div>
 </template>
 

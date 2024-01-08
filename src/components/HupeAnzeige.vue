@@ -1,5 +1,5 @@
 <template>
-  <div class="horn-status">{{ hornStatus !== null ? hornStatus : $t('N/A') }}</div>
+  <div class="horn-status">{{ hornStatus !== null ? hornStatus : 'N/A' }}</div>
 </template>
 
 <script>

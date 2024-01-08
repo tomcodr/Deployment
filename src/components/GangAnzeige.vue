@@ -1,5 +1,5 @@
 <template>
-  <b class="gang-value">{{ gearValue !== null ? gearValue : $t('N/A') }}</b>
+  <b class="gang-value">{{ gearValue !== null ? gearValue : 'N/A' }}</b>
 </template>
 
 <script>

@@ -6,7 +6,7 @@
    <div class="arrow"><i class='bx bx-left-arrow-alt'></i></div>
    </div>
    
-   <div class="fahrzeug-hinzufuegen-text">{{ $t('Fahrzeuge Hinzufügen') }}</div>
+   <div class="fahrzeug-hinzufuegen-text">Fahrzeuge Hinzufügen</div>
   
 <CarouselExample/>
 

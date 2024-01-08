@@ -2,7 +2,7 @@
   <!-- Container für Bremsinformationen -->
   <div class="brake-container">
     <!-- Anzeige des Bremswerts, zeigt den Wert an oder 'N/A', wenn nicht verfügbar -->
-    <b class="brake-value">{{ brakeInputValue !== null ? brakeInputValue : $t('N/A') }}</b>
+    <b class="brake-value">{{ brakeInputValue !== null ? brakeInputValue : 'N/A' }}</b>
   </div>
 </template>
 

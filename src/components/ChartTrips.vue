@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="date-inputs">
-      <label for="startDate" class="date-label">{{ $t('Start') }}</label>
+      <label for="startDate" class="date-label">Start</label>
       <input type="date" v-model="startDate" @change="updateChart" id="startDate">
 
-      <label for="endDate" class="date-label">{{ $t('Ende') }}</label>
+      <label for="endDate" class="date-label">Ende</label>
       <input type="date" v-model="endDate" @change="updateChart" id="endDate">
     </div>
 

@@ -1,5 +1,5 @@
 <template>
-  <b class="oel-value">{{ oilTemperatureValue !== null ? oilTemperatureValue : $t('N/A') }}</b>
+  <b class="oel-value">{{ oilTemperatureValue !== null ? oilTemperatureValue : 'N/A' }}</b>
 </template>
 
 <script>

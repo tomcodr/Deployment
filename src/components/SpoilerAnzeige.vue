@@ -1,5 +1,5 @@
 <template>
-  <div>{{ spoilerStatus !== null ? spoilerStatus : $t('N/A') }}</div>
+  <div>{{ spoilerStatus !== null ? spoilerStatus : 'N/A' }}</div>
 </template>
 
 <script>

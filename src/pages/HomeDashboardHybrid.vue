@@ -12,21 +12,21 @@
   <div class="gang">
     <div class="gang-background" @click="onGangContainerClick"></div>
     <b class="gang-value"><GangAnzeige/></b>
-    <div class="gangtitel">{{ $t('Gang') }}</div>
+    <div class="gangtitel">Gang</div>
     <div @click="onGangContainerClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
   </div>
       
       <div class="bremse">
           <div class="bremse-background" @click=" onBremseContainerClick"></div>
           <b class="bremse-value"><BremseAnzeige/></b>
-          <div class="bremsetitel">{{ $t('Bremsdruck') }}</div>
+          <div class="bremsetitel">Bremsdruck</div>
           <div @click="onBremseContainerClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
       </div>
       
       <div class="geschwindigkeit">
         <div class="geschwindigkeit-background" @click="onSpeedContainerClick"></div>
         <b class="geschwindigkeit-value"><GeschwindigkeitAnzeige/></b>
-        <div class="geschwindigkeittitel">{{ $t('Geschwindigkeit') }}</div>
+        <div class="geschwindigkeittitel">Geschwindigkeit</div>
         <div @click="onSpeedContainerClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
       </div>
 
@@ -45,7 +45,7 @@
       <div class="drehzahl">
         <div class="drehzahl-background" @click="onDrehzahlContainerClick"></div>
         <b class="drehzahl-value"><DrehzahlAnzeige/></b>
-        <div class="drehlzahltitel">{{ $t('Drehzahl') }}</div>
+        <div class="drehlzahltitel">Drehzahl</div>
         <div @click="onDrehzahlContainerClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
       </div>
    
@@ -53,21 +53,21 @@
     
 
   
-    <div class="motorhaube-text">{{ $t('Motorhaube') }}</div>
+    <div class="motorhaube-text">Motorhaube</div>
     <div class="spoiler-closed"><SpoilerAnzeige/></div>
     <div class="motorhaube-closed" v-if="currentLocale === 'de'" :style="{ left: '71%' }">
-      {{ $t('Geschlossen') }}
+      Geschlossen'
     </div>
 
     <div class="motorhaube-closed" v-else :style="{ left: '71%' }">
-      {{ $t('Closed') }}
+      Closed
     </div>
-    <div class="spoiler-text">{{ $t('Spoiler') }}</div>
-    <div class="hupe-text">{{ $t('Hupe') }}</div>
+    <div class="spoiler-text">Spoiler</div>
+    <div class="hupe-text">Hupe</div>
     <div class="hupe-aktiv"><HupeAnzeige/></div>
     <div class="abs-aktiv"><ABS/></div>
-    <div class="abs-text">{{ $t('ABS') }}</div>
-    <div class="bremse-text">{{ $t('Bremse') }}</div>
+    <div class="abs-text">ABS</div>
+    <div class="bremse-text">Bremse</div>
     <div class="bremse-aktiv"><BremseJaNein/></div>
   
 
@@ -143,7 +143,7 @@
     name: "HomeDashboardHybrid",
     data() {
       return {
-        currentLocale: this.$i18n.locale,
+       
       };
     },
     components: { GangAnzeige, DrehzahlAnzeige, TankAnzeige, GeschwindigkeitAnzeige, OelTemperaturAnzeige, BremseAnzeige, WasserTemperaturAnzeige, SpoilerAnzeige, HupeAnzeige,ABS, BremseJaNein, TankvolumenAnzeige, Navigation},

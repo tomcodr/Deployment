@@ -1,5 +1,5 @@
 <template>
-    <div>{{ altitude !== null ? Math.round(altitude) + 'm' : $t('N/A') }}</div>
+    <div>{{ altitude !== null ? Math.round(altitude) + 'm' : 'N/A' }}</div>
   </template>
   
   <script>
