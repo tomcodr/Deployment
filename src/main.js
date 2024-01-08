@@ -46,6 +46,7 @@ import Trips from "./pages/Trips.vue";
 import Bremsen from "./pages/Bremsen.vue";
 import Hoehe from "./pages/Hoehe.vue";
 import NotFound from "./pages/NotFound.vue";
+import Telefon from "./pages/Telefon.vue";
 
 
 
@@ -161,6 +162,15 @@ const routes = [
     meta: {
       requiresAuth: true,
       title: "Tank"
+    },
+  },
+  {
+    path: "/telefon",
+    name: "Telefon",
+    component: Telefon,
+    meta: {
+      requiresAuth: true,
+      title: "Telefon"
     },
   },
   {

@@ -2,7 +2,7 @@
   <body>
   <div class="wrapper">
     <form @submit.prevent="login">
-      <h1>Login</h1>
+      <h1>Login {{ firstName }}</h1>
       <div class="input-box">
         <input v-model="email" type="email" placeholder="Email" required>
       </div>

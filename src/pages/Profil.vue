@@ -1,9 +1,11 @@
 <template>
   <div>
     <h1>Profilseite</h1>
-    <div v-if="user">
-     <div class="icon"><i class='bx bxs-user'></i></div>
-      <p class="text"><strong>Email:</strong> {{ user.email }}</p>
+    <div v-if="userData">
+      <div class="icon"><i class='bx bxs-user'></i></div>
+      <p class="text-name"><strong>Name:</strong> {{ user.value }}</p>
+      <p class="text-email"><strong>Email:</strong> {{ user.email }}</p>
+      <p class="text-number"><strong>Telefonnummer:</strong> {{ userData.phoneNumber }}</p>
     </div>
   </div>
 </template>
@@ -12,11 +14,9 @@
 import { ref, onMounted } from "vue";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-
 const auth = getAuth();
 const user = ref(null);
 const userData = ref(null);
-
 
 onMounted(() => {
   onAuthStateChanged(auth, (authUser) => {
@@ -26,9 +26,7 @@ onMounted(() => {
       // Hier ein beispielhafter Code, um weitere Benutzerdaten zu laden
       // Beachten Sie, dass Sie dies an Ihre tatsächliche Datenstruktur anpassen müssen
       userData.value = {
-        name: "John", // Laden Sie den Namen während des Registrierungsprozesses
-        surname: "Doe", // Laden Sie den Nachnamen während des Registrierungsprozesses
-        phoneNumber: "+123456789" // Laden Sie die Telefonnummer während des Registrierungsprozesses
+       
       };
     }
   });
@@ -36,7 +34,23 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.text {
+.icon {
+  position: absolute;
+  top: 8%;
+  left: 30%;
+  font-size: 100px;
+  color: #fff;
+}
+.text-name {
+  position: absolute;
+  font-size: 24px;
+  font-family: Manrope;
+  top: 30%;
+  left: 30%;
+  color: #fff;
+}
+
+.text-email {
   position: absolute;
   font-size: 24px;
   font-family: Manrope;
@@ -44,12 +58,14 @@ onMounted(() => {
   left: 30%;
   color: #fff;
 }
-
-.icon{
+.text-number {
   position: absolute;
-  top: 8%;
+  font-size: 24px;
+  font-family: Manrope;
+  top: 60%;
   left: 30%;
-  font-size: 300px;
   color: #fff;
 }
+
+
 </style>

@@ -37,6 +37,7 @@
     </label>
     <button @click="register" type="submit" class="btn" required>Register</button>
     <button @click="signInWithGoogle" class="btnGoogle"><i class='bx bxl-google'></i>Sign In With Google</button>
+    <button @click="signInWithGithub" class="btnGithub"><i class='bx bxl-github'></i>Sign In With Github</button>
   </form>
 </div>
 
@@ -46,7 +47,7 @@
 <script setup>
 
 import {ref} from "vue";
-import {getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,} from "firebase/auth";
+import {getAuth, createUserWithEmailAndPassword, GoogleAuthProvider,GithubAuthProvider, signInWithPopup,} from "firebase/auth";
 import {useRouter} from 'vue-router'
 
 
@@ -90,9 +91,18 @@ router.push('/');
 .catch((error) =>[
 
 ])
+}
 
+const signInWithGithub = () => {
+const provider = new GithubAuthProvider();
+signInWithPopup(getAuth(), provider)
+.then((result) =>{
+console.log(result.user);
+router.push('/');
+})
+.catch((error) =>[
 
-
+])
 }
 
 </script>
@@ -205,17 +215,33 @@ body {
 .wrapper .btnGoogle {
   width: 100%;
   height: 45px;
-  background: #fff;
+  background: #4285F4;
   border: none;
   outline: none;
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(0, 0, 0, .1);
   cursor: pointer;
-  color: #333;
+  color: #fff;
   font-weight: 600;
   margin-top: 15px;
 }
 .wrapper .btnGoogle:hover{
+  background: #2a9aba;
+}
+.wrapper .btnGithub {
+  width: 100%;
+  height: 45px;
+  background: #0d1117;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  margin-top: 17px;
+}
+.wrapper .btnGithub:hover{
   background: #2a9aba;
 }
 .arrow {
