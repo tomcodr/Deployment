@@ -19,9 +19,15 @@ async function loadLocaleMessages() {
   return messages;
 }
 
-export default createI18n({
-  legacy: false,
-  locale: 'de',
-  fallbackLocale: 'en',
-  messages: await loadLocaleMessages(),
-});
+// Async function to initialize i18n and load locale messages
+async function initI18n() {
+  return createI18n({
+    legacy: false,
+    locale: 'de',
+    fallbackLocale: 'en',
+    messages: await loadLocaleMessages(),
+  });
+}
+
+// Export the asynchronous initialization function
+export default initI18n;
