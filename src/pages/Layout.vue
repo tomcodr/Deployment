@@ -9,8 +9,8 @@
    <div class="layout-blue" />
    <div class="darkmode-schalter">
     
-   <div class="grün-text">{{ $t('Grün') }}</div>
-   <div class="weiß-text">{{ $t('Weiß') }}</div>
+   <div class="grün-text">Grün</div>
+   <div class="weiß-text">Weiß</div>
    <div class="frozen-text">Frozen</div>
  </div>
 </template>
