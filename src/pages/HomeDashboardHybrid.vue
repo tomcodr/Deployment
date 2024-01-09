@@ -263,7 +263,7 @@
   left: 150px;
 }
 .arrow:hover{
-  color:#426b1f;
+  color: var(--secondary-color); 
 }
 
 
@@ -276,6 +276,7 @@
     display: inline-block;
     width: 136px;
     height: 15.4px;
+    color: var(--text-color); 
     cursor: pointer;
     user-select: none;
   }
@@ -287,6 +288,7 @@
   right: 0%;
   bottom: 0%;
   left: 880px;
+  color: var(--text-color); 
   cursor: pointer;
   user-select: none;
   } 
@@ -298,6 +300,7 @@
     display: inline-block;
     width: 43.6px;
     height: 37.5px;
+    color: var(--text-color); 
     cursor: pointer;
     user-select: none;
   }
@@ -307,7 +310,7 @@
   width: 187.3px;
   height: 122.6px;
   border-radius: 20px;
-  background-color: #426b1f;
+  background-color: var(--secondary-color); 
   opacity: 0.1;
   cursor:pointer;
   user-select: none;
@@ -320,6 +323,7 @@
     left: 660px;
     width: 187.3px;
     height: 122.6px;
+    color: var(--text-color); 
     cursor: pointer;
     user-select: none;
   }
@@ -332,6 +336,7 @@
     display: inline-block;
     width: 43.6px;
     height: 37.5px;
+    color: var(--text-color); 
     cursor: pointer;
     user-select: none;
   }
@@ -342,6 +347,7 @@
     left: 440px;
     width: 187.3px;
     height: 122.6px;
+    color: var(--text-color); 
     cursor: pointer;
     user-select: none;
   }
@@ -353,6 +359,7 @@
     display: inline-block;
     width: 130px;
     height: 37.5px;
+    color: var(--text-color); 
     cursor: pointer;
     user-select: none;
   }
@@ -383,6 +390,7 @@
     display: inline-block;
     width: 43.6px;
     height: 37.5px;
+    color: var(--text-color); 
     cursor: pointer;
     user-select: none;
   }
@@ -393,6 +401,7 @@
     display: inline-block;
     width: 43.6px;
     height: 37.5px;
+    color: var(--text-color); 
     cursor: pointer;
     user-select: none;
   }
@@ -402,6 +411,7 @@
     left: 220px;
     width: 187.3px;
     height: 122.6px;
+    color: var(--text-color); 
     cursor: pointer;
     user-select: none;
   }
@@ -412,6 +422,7 @@
     left: 0px;
     width: 193px;
     height: 125px;
+    color: var(--text-color); 
     cursor: pointer;
     user-select: none;
   }
@@ -423,6 +434,7 @@
     display: inline-block;
     width: 150px;
     height: 37.5px;
+    color: var(--text-color); 
     cursor: pointer;
     user-select: none;
   }
@@ -443,7 +455,7 @@
     background-color: rgba(255, 255, 255, 0);
     width: 118px;
     height: 32px;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-color); 
     user-select: none;
   }
   .png-batterie-icon {
@@ -481,7 +493,7 @@
     background-color: rgba(255, 255, 255, 0);
     width: 118px;
     height: 32px;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-color); 
     user-select: none;
   }
 
@@ -492,7 +504,7 @@
     background-color: rgba(255, 255, 255, 0);
     width: 118px;
     height: 32px;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-color); 
     user-select: none;
   }
 
@@ -548,7 +560,7 @@
   transform: translate(-50%, -50%);
   font-weight: 600;
   font-family: 'Poppins', sans-serif;
-  color: #fff;
+  color: var(--text-color); 
   white-space: nowrap; /* Verhindert, dass der Text umbrochen wird */
 }
   .motorhaube-text {
@@ -558,6 +570,7 @@
     top: 244px; 
     left: 1229px; 
     font-weight: 300;
+    color: var(--text-color); 
     display: inline-block;
     user-select: none;
 }
@@ -569,7 +582,7 @@
     top: 270px; 
     left: 1062px; 
     font-weight: 300;
-    color: #426b1f;
+    color: var(--secondary-color); 
     text-align: center;
     display: inline-block;
     user-select: none;
@@ -582,7 +595,7 @@
     top: 244px; 
     left: 1062px; 
     font-weight: 300;
-    color: #426b1f;
+    color: var(--secondary-color); 
     text-align: center;
     display: inline-block;
     user-select: none;
@@ -595,6 +608,7 @@
     top: 270px; 
     left: 1229px; 
     font-weight: 300;
+    color: var(--text-color); 
     display: inline-block;
     user-select: none;
 }
@@ -606,6 +620,7 @@
     top: 244px; 
     left: 124px; 
     font-weight: 300;
+    color: var(--text-color); 
     display: inline-block;
     user-select: none;
 }
@@ -617,7 +632,7 @@
     top: 244px; 
     left: 210px; 
     font-weight: 300;
-    color: #426b1f;
+    color: var(--secondary-color); 
     text-align: center;
     display: inline-block;
     user-select: none;
@@ -630,7 +645,7 @@
     top: 270px; 
     left: 210px; 
     font-weight: 300;
-    color: #426b1f;
+    color: var(--secondary-color); 
     text-align: center;
     display: inline-block;
     user-select: none;
@@ -643,6 +658,7 @@
     top: 270px; 
     left: 124px; 
     font-weight: 300;
+    color: var(--text-color); 
     display: inline-block;
     user-select: none;
 }
@@ -653,7 +669,7 @@
     top: 296px; 
     left: 210px; 
     font-weight: 300;
-    color: #426b1f;
+    color: var(--secondary-color); 
     text-align: center;
     display: inline-block;
     user-select: none;
@@ -666,6 +682,7 @@
     top: 296px; 
     left: 124px; 
     font-weight: 300;
+    color: var(--text-color); 
     display: inline-block;
     user-select: none;
 }
@@ -680,7 +697,7 @@
   .oel-wasser:hover .element-background,
   .drehzahl:hover .element-background,
   .gang:hover .element-background {
-    background-color: #2b3f00;
+    background-color: #000;
   }
 
   .home-dashboard-hybrid {

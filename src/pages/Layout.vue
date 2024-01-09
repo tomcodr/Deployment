@@ -1,51 +1,38 @@
 <template>
-  <Navigation/>
-
-  <div  @click="goBack">
-   <div class="arrow"><i class='bx bx-left-arrow-alt'></i></div>
-   </div>
-   <div class="layout-green" />
-   <div class="layout-white" />
-   <div class="layout-blue" />
-   <div class="darkmode-schalter">
-    
-   <div class="grün-text">Grün</div>
-   <div class="weiß-text">Weiß</div>
-   <div class="frozen-text">Frozen</div>
- </div>
+  <Navigation />
+  <div @click="goBack">
+    <div class="arrow"><i class='bx bx-left-arrow-alt'></i></div>
+  </div>
+  <div class="layout-green" @click="setMode('green')" />
+  <div class="layout-white" @click="setMode('white')" />
+  <div class="layout-blue" @click="setMode('blue')" />
+  <div class="darkmode-schalter">
+    <div class="grün-text">Grün</div>
+    <div class="weiß-text">Weiß</div>
+    <div class="frozen-text">Frozen</div>
+  </div>
 </template>
+
+
+
 <script>
- import { defineComponent } from "vue";
- import Navigation from '../components/Navigation.vue';
+import { defineComponent } from "vue";
+import Navigation from '../components/Navigation.vue';
 
- 
- 
-
-
- export default defineComponent({
-   name: "Layout",
-   components: {Navigation},
-   data() {
-   return {
-     isWhiteMode: false,
-     isBlueMode: false,
-     isGreenMode: false,
-   };
- },
- methods: {
-   toggleBackgroundMode() {
-     // Logik zum Umschalten zwischen den Hintergrundmodi
-     this.isWhiteMode = !this.isWhiteMode;
-     this.isBlueMode = !this.isBlueMode;
-     this.isGreenMode = !this.isGreenMode;
-   },
-   goBack() {
-     // Navigiere zur vorherigen Seite
-     this.$router.go(-1); // Diese Zeile funktioniert in Vue Router
-     // Alternativ: window.history.back();
-   },
- },
- });
+export default defineComponent({
+  name: "Layout",
+  components: { Navigation },
+  methods: {
+    setMode(mode) {
+      document.documentElement.style.setProperty('--secondary-color', `var(--${mode}-color)`);
+    },
+    goBack() {
+      // Navigiere zur vorherigen Seite
+      this.$router.go(-1); // Diese Zeile funktioniert in Vue Router
+      // Alternativ: window.history.back();
+    },
+  },
+});
 </script>
 
 <style scoped>
@@ -96,6 +83,16 @@
    opacity: 0.8; 
    transition: all 0.3s ease; 
  }
+
+ [data-active-mode="white"] .layout-white,
+[data-active-mode="blue"] .layout-blue,
+[data-active-mode="green"] .layout-green {
+  width: 220px;
+  height: 220px;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
  .grün-text {
  position: absolute;
  height: 15px;
@@ -138,8 +135,8 @@
     color: #fff;
     cursor: pointer;
   }
-.arrow:hover{
-  color:#426b1f;
+  .arrow:hover {
+  color: var(--text-color);
 }
 
 

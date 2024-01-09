@@ -202,7 +202,7 @@ margin-bottom: 0.1px 0;
 /* Verbessertes Hover-Effekt für den Text */
 .text:hover {
 background-color: rgba(255, 255, 255, 0.1);
-color: #193300;
+color: var(--secondary-color); 
 }
 
 body {
@@ -262,7 +262,7 @@ cursor: auto;
   margin-left: 2.5rem;
 }
 .navbar a:hover{
-  color:#426b1f;
+  color:var(--secondary-color); 
 }
 
 #check {

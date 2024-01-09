@@ -40,8 +40,13 @@ body {
 
 
 :root {
+  --green-color: #426b1f;
+  /* Ihre aktuelle Primärfarbe */
+  --blue-color: #1dc4ce;
+  /* Ihre neue Sekundärfarbe */
   --text-color: #fff;
 }
+
 
 canvas {
   touch-action: none;
