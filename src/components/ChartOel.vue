@@ -7,18 +7,20 @@
     <input type="date" v-model="endDate" @change="updateChart" id="endDate">
 
     <!-- Ladeanzeige -->
-    <div class="loading" v-if="loading">Lädt...</div>
+    <div class = "loading" v-if="loading">Lädt...</div>
 
     <canvas ref="myChart" width="550" height="300"></canvas>
   </div>
 </template>
 
 <script>
+// import Chart from 'chart.js/auto';
 import 'chartjs-plugin-zoom';
-import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js/auto';
+import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js/auto'
 import zoomPlugin from 'chartjs-plugin-zoom';
 
-Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, zoomPlugin);
+Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, zoomPlugin)
+
 
 export default {
   data() {
@@ -28,17 +30,10 @@ export default {
       oilTemperatureData: [],
       chartInstance: null,
       loading: false, // Flag für die Ladeanzeige
-      updateInterval: null, // Variable für das Aktualisierungsintervall
     };
   },
   mounted() {
     this.fetchOilTemperatureData();
-    // Starte das Aktualisierungsintervall
-    this.updateInterval = setInterval(this.fetchOilTemperatureData, 2000);
-  },
-  beforeDestroy() {
-    // Beende das Aktualisierungsintervall, um Speicherlecks zu vermeiden
-    clearInterval(this.updateInterval);
   },
   methods: {
     async fetchOilTemperatureData() {
@@ -49,12 +44,8 @@ export default {
 
         this.oilTemperatureData = data.messwerte;
 
-        // Wenn ein Chart vorhanden ist, aktualisiere es, andernfalls initialisiere es
-        if (this.chartInstance) {
-          this.updateChart();
-        } else {
-          this.renderChart(this.oilTemperatureData);
-        }
+        // Initialize the chart with the full dataset
+        this.renderChart(this.oilTemperatureData);
       } catch (error) {
         console.error('Error fetching oil temperature data:', error);
       } finally {
@@ -113,7 +104,7 @@ export default {
                   enabled: true,
                 },
                 pinch: {
-                  enabled: true,
+                  enabled: true
                 },
                 mode: 'xy',
                 speed: 0.1,
@@ -136,7 +127,6 @@ export default {
   font-size: 25px; /* Passen Sie die gewünschte Schriftgröße an */
   top: 200px;
 }
-
 input[type="date"] {
   height: 30px; /* Passen Sie die gewünschte Höhe an */
   margin-right: 100px;

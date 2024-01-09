@@ -16,11 +16,12 @@
 </template>
 
 <script>
+// import Chart from 'chart.js/auto';
 import 'chartjs-plugin-zoom';
-import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js/auto';
+import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js/auto'
 import zoomPlugin from 'chartjs-plugin-zoom';
 
-Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, zoomPlugin);
+Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, zoomPlugin)
 
 export default {
   data() {
@@ -30,17 +31,10 @@ export default {
       tripData: [],
       chartInstance: null,
       loading: false, // Flag für die Ladeanzeige
-      updateInterval: null, // Variable für das Aktualisierungsintervall
     };
   },
   mounted() {
     this.fetchTripData();
-    // Starte das Aktualisierungsintervall
-    this.updateInterval = setInterval(this.fetchTripData, 2000);
-  },
-  beforeDestroy() {
-    // Beende das Aktualisierungsintervall, um Speicherlecks zu vermeiden
-    clearInterval(this.updateInterval);
   },
   methods: {
     async fetchTripData() {
@@ -50,12 +44,8 @@ export default {
         const data = await response.json();
         this.tripData = data.messwerte;
 
-        // Wenn ein Chart vorhanden ist, aktualisiere es, andernfalls initialisiere es
-        if (this.chartInstance) {
-          this.updateChart();
-        } else {
-          this.renderChart(this.tripData);
-        }
+        // Initialize the chart with the full dataset
+        this.renderChart(this.tripData);
       } catch (error) {
         console.error('Error fetching trip data:', error);
       } finally {
@@ -116,7 +106,7 @@ export default {
                   enabled: true,
                 },
                 pinch: {
-                  enabled: true,
+                  enabled: true
                 },
                 mode: 'xy',
                 speed: 0.1,

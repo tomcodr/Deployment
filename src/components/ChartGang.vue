@@ -7,17 +7,19 @@
     <input type="date" v-model="endDate" @change="updateChart" id="endDate">
 
     <!-- Ladeanzeige -->
-    <div class="" v-if="loading">Lädt...</div>
+    <div class = "" v-if="loading">Lädt...</div>
 
     <canvas ref="myChart" width="850" height="400"></canvas>
   </div>
 </template>
 
 <script>
-import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js/auto';
+// import Chart from 'chart.js/auto';
+import 'chartjs-plugin-zoom';
+import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js/auto'
 import zoomPlugin from 'chartjs-plugin-zoom';
 
-Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, zoomPlugin);
+Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, zoomPlugin)
 
 export default {
   data() {
@@ -31,11 +33,6 @@ export default {
   },
   mounted() {
     this.fetchGearIndexData();
-
-    // Setze ein Intervall, um die Funktion alle 2 Sekunden aufzurufen
-    setInterval(() => {
-      this.fetchGearIndexData();
-    }, 2000);
   },
   methods: {
     async fetchGearIndexData() {
@@ -105,7 +102,7 @@ export default {
                   enabled: true,
                 },
                 pinch: {
-                  enabled: true,
+                  enabled: true
                 },
                 mode: 'xy',
                 speed: 0.1,
@@ -119,20 +116,21 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .loading {
-  position: absolute;
-  top: 150px;
-  left: 350px;
-  font-weight: 100;
-}
-input[type="date"] {
-  height: 30px;
+    position: absolute;
+    top: 150px;
+    left: 350px;
+    font-weight: 100;
+  }
+  input[type="date"] {
+  height: 30px; /* Passen Sie die gewünschte Höhe an */
   margin-right: 100px;
-  background-color: #4BC0C0;
-  color: #FFFFFF;
-  border: 1px solid #4BC0C0;
-  border-radius: 5px;
-  user-select: none;
+  background-color: #4BC0C0; /* Ändern Sie die Hintergrundfarbe nach Bedarf */
+  color: #FFFFFF; /* Ändern Sie die Textfarbe nach Bedarf */
+  border: 1px solid #4BC0C0; /* Ändern Sie die Randfarbe nach Bedarf */
+  border-radius: 5px; /* Ändern Sie die Randradius nach Bedarf */
+  user-select: none; /* Deaktivieren Sie die Textauswahl */
 }
 </style>

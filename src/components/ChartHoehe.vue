@@ -16,10 +16,13 @@
 </template>
 
 <script>
-import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js/auto';
+// import Chart from 'chart.js/auto';
+import 'chartjs-plugin-zoom';
+import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js/auto'
 import zoomPlugin from 'chartjs-plugin-zoom';
 
-Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, zoomPlugin);
+Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, zoomPlugin)
+
 
 export default {
   data() {
@@ -33,11 +36,6 @@ export default {
   },
   mounted() {
     this.fetchAltitudeData();
-
-    // Setze ein Intervall, um die Funktion alle 2 Sekunden aufzurufen
-    setInterval(() => {
-      this.fetchAltitudeData();
-    }, 2000);
   },
   methods: {
     async fetchAltitudeData() {
@@ -104,15 +102,15 @@ export default {
                 threshold: 10,
               },
               zoom: {
-                wheel: {
-                  enabled: true,
-                },
-                pinch: {
-                  enabled: true,
-                },
-                mode: 'xy',
-                speed: 0.1,
+              wheel: {
+                enabled: true,
               },
+              pinch: {
+                enabled: true
+              },
+              mode: 'xy',
+              speed: 0.1,
+            },
             },
           },
         },
@@ -130,5 +128,15 @@ export default {
 .loading {
   font-size: 25px; /* Passen Sie die gewünschte Schriftgröße an */
   top: 200px;
+}
+
+input[type="date"] {
+  height: 30px; /* Passen Sie die gewünschte Höhe an */
+  margin-right: 100px;
+  background-color: #4BC0C0; /* Ändern Sie die Hintergrundfarbe nach Bedarf */
+  color: #FFFFFF; /* Ändern Sie die Textfarbe nach Bedarf */
+  border: 1px solid #4BC0C0; /* Ändern Sie die Randfarbe nach Bedarf */
+  border-radius: 5px; /* Ändern Sie die Randradius nach Bedarf */
+  user-select: none; /* Deaktivieren Sie die Textauswahl */
 }
 </style>

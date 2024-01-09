@@ -10,18 +10,21 @@
     <div class="element-background" @click="onGangContainerClick"></div>
     <b class="gang-value"><GangAnzeige/></b>
     <div class="element-titel">Gang</div>
+    <div @click="onGangClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
   </div>
       
       <div class="bremse">
           <div class="element-background" @click=" onBremseContainerClick"></div>
           <b class="bremse-value"><BremseAnzeige/></b>
           <div class="element-titel">Bremsdruck</div>
+          <div @click="onBremseClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
       </div>
       
       <div class="speed">
         <div class="element-background" @click="onSpeedContainerClick"></div>
         <b class="speed-value"><GeschwindigkeitAnzeige/></b>
         <div class="element-titel">Geschwindigkeit</div>
+        <div @click="onGeschwindigkeitClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
       </div>
       
       <div class="oel-wasser">
@@ -30,13 +33,13 @@
         <img class="png-oel-icon"  src="/png-l-icon@2x.png" />
         <b class="wasser-value"><WasserTemperaturAnzeige/></b>
         <b class="oel-value"><OelTemperaturAnzeige/></b>
-        
+        <div @click="onWasserClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
       </div>
       <div class="drehzahl">
         <div class="element-background" @click="onDrehzahlContainerClick"></div>
         <b class="drehzahl-value"><DrehzahlAnzeige/></b>
         <div class="element-titel">Drehzahl</div>
-
+        <div @click="onDrehzahlClick" class="arrow"><i class='bx bxs-right-arrow-circle'></i></div>
       </div>
    
     </div>
@@ -45,9 +48,7 @@
   
     <div class="motorhaube-text">Motorhaube</div>
     <div class="spoiler-closed"><SpoilerAnzeige/></div>
-    <div class="motorhaube-closed" >
-      GESCHLOSSEN
-    </div>
+    <div class="motorhaube-closed" >GESCHLOSSEN</div>
 
    
     <div class="spoiler-text">Spoiler</div>
@@ -190,29 +191,20 @@
   },
 
 
-      onGangContainerClick() {
+      onGangClick() {
         this.$router.push("gang");
       },
-      onBremseContainerClick() {
+      onBremseClick() {
         this.$router.push("bremsen");
       },
-      onSpeedContainerClick() {
+      onGeschwindigkeitClick() {
         this.$router.push("geschwindigkeit");
       },
-      onLWasserContainerClick() {
+      onWasserClick() {
         this.$router.push("temperaturen");
       },
-      onDrehzahlContainerClick() {
+      onDrehzahlClick() {
         this.$router.push("drehzahl");
-      },
-      openSideBoardMenu() {
-        this.isSideBoardMenuOpen = true;
-      },
-      closeSideBoardMenu() {
-        this.isSideBoardMenuOpen = false;
-      },
-      onProfilIconClick() {
-        this.$router.push("profil");
       },
       async fetchDataForComponents() {
         try {
@@ -265,6 +257,14 @@
 
 
 <style scoped>
+.arrow{
+  position: absolute;
+  top: 82px;
+  left: 150px;
+}
+.arrow:hover{
+  color:#426b1f;
+}
 
 
   .element-titel {
@@ -359,7 +359,7 @@
   .png-wasser-icon {
     position: absolute;
     top: 8px;
-    left: 138px;
+    left: 90px;
     width: 28px;
     height: 37px;
     object-fit: cover;
@@ -379,7 +379,7 @@
   .wasser-value {
     position: absolute;
     top: 81px;
-    left: 135px;
+    left: 90px;
     display: inline-block;
     width: 43.6px;
     height: 37.5px;
