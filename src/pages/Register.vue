@@ -27,7 +27,7 @@
         <i class='bx bxs-lock-alt'></i>
       </div>
      <div class="input-field">
-    <input type="password" v-model="confrimPassword" placeholder="Confirm Password" required>
+    <input type="password" v-model="confirmPassword" placeholder="Confirm Password" required>
     <i class='bx bxs-lock-alt'></i>
 </div>
     </div>
@@ -49,33 +49,50 @@
 import {ref} from "vue";
 import {getAuth, createUserWithEmailAndPassword, GoogleAuthProvider,GithubAuthProvider, signInWithPopup,} from "firebase/auth";
 import {useRouter} from 'vue-router'
+import { doc, setDoc, collection } from "firebase/firestore";
+import { db } from "../main"; 
 
 
-
+const Name = ref("");
 const email = ref("");
 const password = ref("");
 const router = useRouter();
 const auth = getAuth(); // Add this line to get the auth instance
 
 
-const register = () =>{
-createUserWithEmailAndPassword(getAuth(), email.value, password.value)
-.then((data) =>{
-  console.log("Succesfully registered");
+const register = () => {
+  // Erstelle den Benutzer in Firebase Authentication
+  createUserWithEmailAndPassword(auth, email.value, password.value)
+    .then((userCredential) => {
+      // Benutzerdaten
+      const user = userCredential.user;
 
-console.log(auth.currentUser);
+      // Hier kannst du die Benutzerdaten in Firestore speichern
+      // Erstelle eine Firestore-Referenz auf die Benutzerdaten
+      const userRef = doc(collection(db, 'users'), user.uid);
 
-router.push('/login')
-})
-.catch((error)=>{
-  console.log(error.code);
-  alert(error.message);
-});
-
-
-
-
+      // Füge die Benutzerdaten hinzu (Beispiel: Name und Email)
+      setDoc(userRef, {
+        name: Name.value,
+        email: email.value,
+        // Weitere Felder hier...
+      })
+        .then(() => {
+          console.log("Benutzerdaten erfolgreich in Firestore gespeichert");
+          console.log(auth.currentUser);
+          router.push('/login');
+        })
+        .catch((error) => {
+          console.error("Fehler beim Speichern der Benutzerdaten in Firestore:", error);
+          alert("Fehler beim Speichern der Benutzerdaten");
+        });
+    })
+    .catch((error) => {
+      console.error("Fehler bei der Benutzerregistrierung:", error.code, error.message);
+      alert(error.message);
+    });
 };
+
 
 const goBack = () =>{
   router.go(-1)
