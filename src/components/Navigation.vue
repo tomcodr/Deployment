@@ -35,13 +35,7 @@
         <a href="#" @click="onHilfeclick"  style="--i:5; order: 6;"><i class='bx bx-help-circle' ></i></a>
         <a href="#" @click="handleSignOut"><i class='bx bx-exit'></i></a>
   
-        <a>
-        <select id="langSelect" v-model="selectedLanguage" @change="changeLanguage">
-        <option value="de">DE</option>
-        <option value="en">EN</option>
-       <option value="es">ES</option>
-      </select>
-        </a>
+        
       </nav>
     </header>
   </div>

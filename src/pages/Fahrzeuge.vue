@@ -25,6 +25,9 @@
      },
    },
    methods: {
+    onPlusClick(){
+this.$router.push('/fahrzeughinzufuegen')
+    },
  goBack() {
      // Navigiere zur vorherigen Seite
      this.$router.go(-1); // Diese Zeile funktioniert in Vue Router

@@ -9,11 +9,12 @@
     <img class="tank-aktuell-leiste" alt="" src="/tankbalken-aktuell.svg" />
     
     <img
-      class="png-auto"
-      alt=""
-      :src="getImagePath"
+    class="png-auto"
+    :src="getLatestCarPath"
+    alt=""
     />
-    <div class="auto-titel">Porsche 911</div>
+ 
+    <div class="auto-titel"></div>
     
     
 </template>
@@ -29,8 +30,18 @@
     name: "Tank",
     components: { MesswerteDropdown, TankAnzeige, Navigation },
     computed: {
-    getImagePath() {
-      return store.getters.getImagePath;
+      getLatestCarPath() {
+      const carPaths = store.getters.getCarPaths;
+
+      // Wenn das Array carPaths nicht leer ist, gib den neuesten Wert zurück
+      if (carPaths.length > 0) {
+        const latestPath = carPaths[carPaths.length - 1];
+        return latestPath;
+      } else {
+        // Wenn das Array leer ist, gib einen leeren String zurück oder einen Standardpfad
+        return '/default-car-image.png'; // Passe dies entsprechend an
+      }
+    
     },
   },
     methods: {
@@ -70,7 +81,7 @@
   }
   .png-auto {
     position: absolute;
-  top: 25%;
+    top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 36%;

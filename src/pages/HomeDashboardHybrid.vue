@@ -94,14 +94,15 @@
       alt=""
       src="/batterie-balken-aktuell-elektisch.svg"
     />
-    <img class="png-auto-dashboard" 
-    :src="getMarkePic(selectedBrand)" 
+    <img
+    class="png-auto-dashboard"
+    :src="getLatestCarPath"
     alt=""
     />
-    {{ getMarkePic(selectedBrand) }} 
+
 
     
-    <div class="auto-titel">Porsche 911</div>
+    <div class="auto-titel"></div>
 
     </div>
   
@@ -138,58 +139,27 @@
     name: "HomeDashboardHybrid",
     data() {
       return {
-        selectedBrand: null,
+       
       };
     },
     components: { GangAnzeige, DrehzahlAnzeige, TankAnzeige, GeschwindigkeitAnzeige, OelTemperaturAnzeige, BremseAnzeige, WasserTemperaturAnzeige, SpoilerAnzeige, HupeAnzeige,ABS, BremseJaNein, TankvolumenAnzeige, Navigation},
-    
-    created() {
-      this.getMarkePic();
-},
-      
-    
-    
-    methods: {
-      
-      getMarkePic() {
-    const selectedBrand = store.getters.getSelectedBrand;
-    console.log("Selected Brand", selectedBrand); 
-    let imagePath;
+    computed: {
+    getLatestCarPath() {
+      const carPaths = store.getters.getCarPaths;
 
-    switch (selectedBrand) {
-      case 'BMW':
-        imagePath = '/M4 Side.png';
-        break;
-      case 'Mercedes-Benz':
-        imagePath = '/S Class Side.png';
-        break;
-      case 'Volkswagen':
-        imagePath = '/GTI Side.png';
-        break;
-      case 'Ford':
-        imagePath = '/Mustang Side.png';
-        break;
-      case 'Audi':
-        imagePath = '/RS5 Side.png'; 
-        break;
-      case 'Porsche':
-        imagePath = '/png-auto-dashboard@2x.png';
-        break;
-      default:
-        console.error("Kein Bild konnte geladen werden. Unbekannte Marke:", selectedBrand);
-        imagePath = null;
-    }
+      // Wenn das Array carPaths nicht leer ist, gib den neuesten Wert zurück
+      if (carPaths.length > 0) {
+        const latestPath = carPaths[carPaths.length - 1];
+        return latestPath;
+      } else {
+        // Wenn das Array leer ist, gib einen leeren String zurück oder einen Standardpfad
+        return '/default-car-image.png'; // Passen wir entsprechend an
+      }
     
-    if (imagePath) {
-        console.log("Image Path:", imagePath); // Zusätzlicher Log für den Bildpfad
-        store.dispatch('setImagePath', imagePath);
-        return imagePath;
-        
-  } else {
-    return null;
-  }
+    },
   },
 
+    methods: {
 
       onGangClick() {
         this.$router.push("gang");

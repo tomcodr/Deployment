@@ -6,13 +6,14 @@
       </div>
   
       <container class = "chart-oel"><ChartOel/></container>
-      <container class = "chart-wasser"><ChartOel/></container>
+      <container class = "chart-wasser"><ChartWater/></container>
   
       <img
-      class="png-auto-dashboard-icon4"
-      alt=""
-      :src="getImagePath"
+    class="png-auto-dashboard"
+    :src="getLatestCarPath"
+    alt=""
     />
+ 
       
       <img class="wasser-icon" alt="" src="/png-wasser-icon@2x.png" />
       <div class="wasser-value"><WasserTemperaturAnzeige/></div>
@@ -20,7 +21,7 @@
       <img class="oel-icon" alt="" src="/png-l-icon@2x.png" />
       
       
-      <div class="auto-titel">Porsche 911</div>
+      <div class="auto-titel"></div>
   </template>
   
   
@@ -28,16 +29,28 @@
   <script>
     import { defineComponent } from "vue";
     import Navigation from '../components/Navigation.vue';
+    import OelTemperaturAnzeige from "../components/OelTemperaturAnzeige.vue";
     import WasserTemperaturAnzeige from "../components/WasserTemperaturAnzeige.vue";
     import ChartOel from "../components/ChartOel.vue";
+    import ChartWater from "../components/ChartWater.vue";
     import store from '../store/store';
   
     export default defineComponent({
       name: "Temperaturen",
-      components: { WasserTemperaturAnzeige, ChartOel, Navigation },
+      components: { WasserTemperaturAnzeige, OelTemperaturAnzeige, ChartOel, ChartWater, Navigation },
       computed: {
-    getImagePath() {
-      return store.getters.getImagePath;
+        getLatestCarPath() {
+      const carPaths = store.getters.getCarPaths;
+
+      // Wenn das Array carPaths nicht leer ist, gib den neuesten Wert zurück
+      if (carPaths.length > 0) {
+        const latestPath = carPaths[carPaths.length - 1];
+        return latestPath;
+      } else {
+        // Wenn das Array leer ist, gib einen leeren String zurück oder einen Standardpfad
+        return '/default-car-image.png'; // Passe dies entsprechend an
+      }
+    
     },
   },
       methods: {
@@ -51,9 +64,9 @@
   </script>
 
 <style scoped>
-    .png-auto-dashboard-icon4 {
+    .png-auto-dashboard {
       position: absolute;
-  top: 25%;
+      top: 37%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 36%;
@@ -72,8 +85,9 @@
     }
     .wasser-value {
       position: absolute;
-      top: 254px;
-      left: 1089px;
+      top: 260px;
+      left: 1110px;
+      font-size: 20px;
       font-weight: 300;
       display: inline-block;
       width: 78px;
@@ -82,9 +96,10 @@
     }
     .oel-value {
       position: absolute;
-      top: 254px;
-      left: 259px;
-      font-weight: 300;
+      top: 130px;
+      left: 100px;
+      font-size: 20px;
+      font-weight: 800;
       display: inline-block;
       width: 78px;
       height: 42px;

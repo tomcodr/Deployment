@@ -1,32 +1,26 @@
-import createPersistedState from 'vuex-persistedstate';
 import { createStore } from 'vuex';
 
 export default createStore({
-    plugins: [createPersistedState()],                //WENN MAN EIN AUTO LÖSCHT MUSS MAN DARAUF ACHTEN, DAS PERSISTEND ZU BEACHTEN
     state: {
 
-        selectedBrand: null,
-        imagePath: null,
+        carPaths: [], // Array für die gespeicherten Bildpfade
     },
     mutations: {
-        updateSelectedBrand(state, brand) {
-            state.selectedBrand = brand;
-        },
-        setImagePath(state, path) {
-            state.imagePath = path;
+
+
+        addCarPath(state, path) {
+            console.log("8. Mutation addCarPath wurde aufgerufen");
+            console.log("9. Path, der hinzugefügt wird:", path);
+            state.carPaths.push(path);
+            console.log("10. Car Paths im Store nach der Mutation:", state.carPaths);
         },
     },
     actions: {
-        updateSelectedBrand({ commit }, brand) {
-            commit('updateSelectedBrand', brand);
-        },
-        setImagePath({ commit }, path) {
-            commit('setImagePath', path)
+        addCarPath({ commit }, path) {
+            commit('addCarPath', path);
         },
     },
     getters: {
-
-        getSelectedBrand: (state) => state.selectedBrand,
-        getImagePath: (state) => state.imagePath,
+        getCarPaths: (state) => state.carPaths,
     },
 });

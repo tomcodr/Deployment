@@ -20,6 +20,7 @@
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
+import store from '../store/store';  // Pfade anpassen, wenn notwendig
 
 export default {
   name: 'Carousel',
@@ -31,20 +32,14 @@ export default {
     return {
       swiperOptions: {},
       swiper: null,
-      cars: [
-        { image: '/M4 Front.png', title: 'BMW M4' },
-        { image: '/S Class Front.png', title: 'Mercedes S400' },
-        { image: '/Porsche Front.png', title: 'Porsche 911' },
-        { image: '/RS5 Front.png', title: 'Audi RS5' },
-        { image: '/Mustang Front.png', title: 'Ford Mustang' },
-        { image: '/GTI Front.png', title: 'Volkswagen Golf 7 GTI' },
-      ],
+      cars: [],
       selectedStar: null,
     };
   },
   methods: {
     onSwiperInit(swiper) {
       this.swiper = swiper;
+      this.fetchCarsFromStore();  // Daten beim Initialisieren abrufen
     },
     goToPrev() {
       if (this.swiper) {
@@ -65,6 +60,19 @@ export default {
         if (confirm('Möchten Sie Ihre Auswahl ändern?')) {
           this.selectedStar = index;
         }
+      }
+    },
+    fetchCarsFromStore() {
+      try {
+        const carData = store.getters.getCarPaths;  // Ändere dies entsprechend dem Namen deiner Getter-Methode
+
+        if (carData && carData.length > 0) {
+          this.cars = carData.map(path => ({ image: path, title: '' }));  // Titel kann angepasst werden
+        } else {
+          console.error('No car data found in the store.');
+        }
+      } catch (error) {
+        console.error('Error fetching car data from the store:', error);
       }
     },
   },
@@ -91,10 +99,9 @@ export default {
 }
 
 .star-icon {
-  font-size: 48px; /* Ändern Sie die Größe des Sterns hier */
-  margin-top: 5px; /* Fügen Sie einen Abstand oben hinzu */
+  font-size: 48px;
+  margin-top: 5px;
   cursor: pointer;
-  color: #fff;
 }
 
 .filled {

@@ -8,13 +8,14 @@
  
   <div class="gear-text">GEAR</div>
   <div class="gear-value"><GangAnzeige/></div>
+    
   <img
-      class="png-auto"
-      alt=""
-      :src="getImagePath"
+    class="png-auto"
+    :src="getLatestCarPath"
+    alt=""
     />
   
-  <div class="auto-titel">Porsche 911</div>
+  <div class="auto-titel"></div>
   
     
 </template>
@@ -30,8 +31,18 @@ export default defineComponent({
   name: "Gang",
   components: { GangAnzeige, ChartGang, Navigation },
   computed: {
-    getImagePath() {
-      return store.getters.getImagePath;
+    getLatestCarPath() {
+      const carPaths = store.getters.getCarPaths;
+
+      // Wenn das Array carPaths nicht leer ist, gib den neuesten Wert zurück
+      if (carPaths.length > 0) {
+        const latestPath = carPaths[carPaths.length - 1];
+        return latestPath;
+      } else {
+        // Wenn das Array leer ist, gib einen leeren String zurück oder einen Standardpfad
+        return '/default-car-image.png'; // Passe dies entsprechend an
+      }
+    
     },
   },
   methods: {
