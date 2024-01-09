@@ -1,6 +1,3 @@
-//Test
-
-
 
 <template>
   <Navigation/>
@@ -160,22 +157,22 @@
 
     switch (selectedBrand) {
       case 'BMW':
-        imagePath = '/BMW.png';
+        imagePath = '/M4 Side.png';
         break;
       case 'Mercedes-Benz':
-        imagePath = '/Mercedes.png';
+        imagePath = '/S Class Side.png';
         break;
       case 'Volkswagen':
-        imagePath = '/Volkswagen.jpg';
+        imagePath = '/GTI Side.png';
         break;
       case 'Ford':
-        imagePath = '/Ford.jpg';
+        imagePath = '/Mustang Side.png';
         break;
       case 'Audi':
-        imagePath = '/audi-a6-schwarz-vorne.png'; 
+        imagePath = '/RS5 Side.png'; 
         break;
       case 'Porsche':
-        imagePath = '/Porsche.png';
+        imagePath = '/png-auto-dashboard@2x.png';
         break;
       default:
         console.error("Kein Bild konnte geladen werden. Unbekannte Marke:", selectedBrand);

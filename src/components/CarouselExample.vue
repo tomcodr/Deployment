@@ -1,4 +1,3 @@
-Carousel bearbeitet von Ilhan
 <template> 
   <div style="text-align: center; margin-top: 150px;">
     <swiper :options="swiperOptions" v-on:init="onSwiperInit" ref="mySwiper">
@@ -33,9 +32,12 @@ export default {
       swiperOptions: {},
       swiper: null,
       cars: [
-        { image: '/png-fahrzeug3@2x.png', title: 'BMW M4' },
-        { image: '/png-fahrzeug2@2x.png', title: 'Mercedes S400' },
-        { image: '/png-fahrzeug1@2x.png', title: 'Porsche 911' },
+        { image: '/M4 Front.png', title: 'BMW M4' },
+        { image: '/S Class Front.png', title: 'Mercedes S400' },
+        { image: '/Porsche Front.png', title: 'Porsche 911' },
+        { image: '/RS5 Front.png', title: 'Audi RS5' },
+        { image: '/Mustang Front.png', title: 'Ford Mustang' },
+        { image: '/GTI Front.png', title: 'Volkswagen Golf 7 GTI' },
       ],
       selectedStar: null,
     };

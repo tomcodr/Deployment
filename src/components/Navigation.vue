@@ -251,6 +251,7 @@ height: 60px;
 background-image: url('/png-cartracker-logo@2x.png'); 
 background-size: contain;
 background-repeat: no-repeat;
+cursor: auto;
 }
 
 .navbar a {

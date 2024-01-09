@@ -1,19 +1,26 @@
 <template>
-
-<h1>User Profile</h1>
-  <div class="profile-container">
-    <div class="user-info">
-      
-      <div class="user-details">
-        <p><strong>Name:</strong> {{ user.name }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
+  <Navigation/>
+  <div>
+    <body>
+      <div class="container">
+        <div class="card">
+          <h1 class="text">Login Details</h1>
+          <div class="user"><i class='bx bx-user-circle'></i></div>
+          <div class="imgBx">
+            <img src="/logocar.png">
+          </div>
+          <div class="user-details">
+            <p><strong>Name:</strong> {{ user.name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <router-link to="/">Go Back</router-link>
+    </body>
   </div>
 </template>
 
 <script setup>
+import Navigation from '../components/Navigation.vue';
 import { ref, onMounted } from 'vue';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
@@ -38,32 +45,91 @@ onMounted(() => {
     }
   });
 });
+
 </script>
 
 <style scoped>
-.profile-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Manrope';
 }
 
-.user-info {
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
+
+.container {
+    position: relative;
+}
+
+.container .card {
+    width: 320px;
+    height: 450px;
+    background: #232323;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.container .card .imgBx {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10000;
+    width: 100%;
+    height: 220px;
+    transition: 0.5s;
+}
+
+.container .card .imgBx {
+    top: 0%;
+    transform: translateY(0%);
+}
+
+.container .card .imgBx img {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-5deg);
+    width: 270px;
+}
+
+.container .card .contentBx {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    transition: 1s;
+    z-index: 10;
+}
+.text{
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  color: #fff;
+
+}
+
 
 .user-details {
+  position: absolute;
+  top: 350px;
+  left: 20px;
   flex-grow: 1;
+  color: #fff;
+  font-size: 18px;
 }
 
-/* Add more styling as needed */
+.user{
+  position: absolute;
+  top: 200px;
+  left: 110px;
+  font-size: 100px;
+  color: #fff;
+}
+
 </style>

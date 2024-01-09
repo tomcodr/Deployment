@@ -16,7 +16,7 @@
       
       <img class="wasser-icon" alt="" src="/png-wasser-icon@2x.png" />
       <div class="wasser-value"><WasserTemperaturAnzeige/></div>
-      <div class="l-function2"><OelTemperaturAnzeige/></div>
+      <div class="oel-value"><OelTemperaturAnzeige/></div>
       <img class="oel-icon" alt="" src="/png-l-icon@2x.png" />
       
       
@@ -78,8 +78,9 @@
       display: inline-block;
       width: 78px;
       height: 42px;
+      color:#fff;
     }
-    .l-function2 {
+    .oel-value {
       position: absolute;
       top: 254px;
       left: 259px;
@@ -87,6 +88,7 @@
       display: inline-block;
       width: 78px;
       height: 42px;
+      color:#fff;
     }
     .oel-icon {
       position: absolute;

@@ -49,7 +49,7 @@ goBack() {
 });
 </script>
 
-[19:15, 8.1.2024] Faruk  Mercan: <style scoped>
+<style scoped>
 
 .auto-titel {
   position: absolute;
